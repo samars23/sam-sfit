@@ -1,65 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sam'sFit90 - 90-Day Fitness Challenge Tracker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sam'sFit90 - 90 Day Fitness Challenge</title>
 
-<!-- Fonts & Icons -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
-/* All the CSS styles remain exactly as you had them */
-/* Including all the :root variables and complete CSS */
-
 :root {
   --primary: #7c3aed;
   --primary-light: #a78bfa;
   --primary-dark: #5b21b6;
   --secondary: #8b5cf6;
-  --secondary-light: #c4b5fd;
   --accent: #10b981;
-  --accent-dark: #059669;
   --danger: #ef4444;
   --warning: #f59e0b;
-  --info: #3b82f6;
   --cheat: #f97316;
-  --cheat-light: #fdba74;
   
-  --bg: linear-gradient(135deg, #f8fafc 0%, #f3e8ff 50%, #ede9fe 100%);
-  --card-bg: rgba(255, 255, 255, 0.75);
-  --card-border: rgba(255, 255, 255, 0.9);
-  --glass-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
-  --glass-shadow-hover: 0 16px 48px rgba(99, 102, 241, 0.15);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f3e8ff 50%, #ede9fe 100%);
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.4);
+  --shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
+  --shadow-hover: 0 16px 48px rgba(99, 102, 241, 0.15);
   
   --text: #1e293b;
   --text-muted: #64748b;
   --text-light: #94a3b8;
   
-  --success-bg: rgba(16, 185, 129, 0.15);
-  --success-border: rgba(16, 185, 129, 0.3);
-  --danger-bg: rgba(239, 68, 68, 0.15);
-  --danger-border: rgba(239, 68, 68, 0.3);
-  --pending-bg: rgba(100, 116, 139, 0.1);
-  --pending-border: rgba(100, 116, 139, 0.2);
-  --cheat-bg: rgba(249, 115, 22, 0.15);
-  --cheat-border: rgba(249, 115, 22, 0.3);
-  
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
   --radius: 24px;
   --radius-sm: 16px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --morph-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
@@ -69,10 +45,11 @@
 
 body {
   min-height: 100vh;
+  background: var(--bg-gradient);
   color: var(--text);
   line-height: 1.6;
-  background: var(--bg);
   overflow-x: hidden;
+  padding-bottom: 2rem;
 }
 
 /* Header */
@@ -80,45 +57,37 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
+  background: var(--card-bg);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-bottom: var(--glass-border);
+  box-shadow: var(--shadow);
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border-bottom: var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  gap: 2rem;
   transition: var(--transition);
 }
 
-/* Logo */
 .logo {
   display: flex;
   align-items: center;
   gap: 1rem;
-  position: relative;
-  flex-shrink: 0;
 }
 
 .logo-icon {
   width: 56px;
   height: 56px;
-  border-radius: 20px;
+  border-radius: 18px;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.75rem;
-  font-weight: 800;
   color: white;
-  box-shadow: 
-    0 12px 32px rgba(124, 58, 237, 0.25),
-    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.25);
   animation: logoFloat 3s ease-in-out infinite;
-  transition: var(--transition);
-  flex-shrink: 0;
 }
 
 @keyframes logoFloat {
@@ -130,160 +99,127 @@ header {
   font-size: 1.75rem;
   font-weight: 900;
   letter-spacing: -0.02em;
-  background: linear-gradient(
-    135deg,
-    var(--primary-dark) 0%,
-    var(--secondary) 100%
-  );
+  background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  white-space: nowrap;
 }
 
-/* Header Stats */
 .header-stats {
   display: flex;
   gap: 1rem;
-  align-items: center;
   flex: 1;
   justify-content: center;
   overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 0.5rem 0;
-  min-width: 0;
 }
 
-.header-stats::-webkit-scrollbar {
-  display: none;
-}
+.header-stats::-webkit-scrollbar { display: none; }
 
 .stat-badge {
   min-width: 100px;
-  padding: 1rem 1.5rem;
+  padding: 0.85rem 1.25rem;
   border-radius: var(--radius-sm);
   background: var(--card-bg);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border: var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.35rem;
   transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.stat-badge::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
-  transition: left 0.7s;
-}
-
-.stat-badge:hover::before {
-  left: 100%;
 }
 
 .stat-badge:hover {
   transform: translateY(-4px);
-  box-shadow: var(--glass-shadow-hover);
-  border-color: rgba(124, 58, 237, 0.4);
+  box-shadow: var(--shadow-hover);
 }
 
 .stat-value {
   font-size: 1.75rem;
   font-weight: 800;
-  background: linear-gradient(
-    45deg,
-    var(--primary-dark),
-    var(--secondary)
-  );
+  background: linear-gradient(45deg, var(--primary-dark), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .stat-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
 
-/* View Controls */
-.view-controls {
-  display: flex;
-  gap: 0.75rem;
-  flex-shrink: 0;
-}
-
-.view-btn {
-  background: var(--card-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: var(--glass-border);
-  color: var(--text-muted);
-  padding: 0.75rem 1.25rem;
+.header-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
   border-radius: var(--radius-sm);
-  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   white-space: nowrap;
-  min-height: 44px;
 }
 
-.view-btn:hover {
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--primary-dark);
+.header-btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-hover);
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.35);
 }
 
-.view-btn.active {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  border-color: transparent;
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.25);
-}
-
-/* Main Layout */
+/* Main Container */
 .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
 }
 
-@media (min-width: 1024px) {
-  .container {
-    grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
-    align-items: flex-start;
-  }
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.35rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-sm);
+  border: var(--glass-border);
+  box-shadow: var(--shadow);
 }
 
-/* Glass Cards */
+.tab-btn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Cards */
 .card {
   background: var(--card-bg);
   backdrop-filter: blur(20px);
@@ -291,39 +227,23 @@ header {
   border: var(--glass-border);
   border-radius: var(--radius);
   padding: 1.75rem;
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
   transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.1), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--glass-shadow-hover);
-}
-
-.card:hover::before {
-  opacity: 1;
+  box-shadow: var(--shadow-hover);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
 }
 
 .card-title {
@@ -332,65 +252,57 @@ header {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: var(--text);
 }
 
 .card-title i {
-  color: var(--primary);
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
-.card-subtitle {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-top: 0.25rem;
+/* Dashboard Layout */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .dashboard {
+    grid-template-columns: 2fr 1fr;
+  }
 }
 
 /* Forms */
-.activity-form {
-  display: grid;
-  gap: 1.25rem;
-}
-
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .form-row {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 label {
+  display: block;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-muted);
+  margin-bottom: 0.5rem;
 }
 
 input, select, textarea {
-  font-size: 0.9rem;
+  width: 100%;
   padding: 0.85rem 1rem;
   border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(226, 232, 240, 0.8);
-  color: var(--text);
+  font-size: 0.9rem;
   transition: var(--transition);
 }
 
-input::placeholder,
-textarea::placeholder {
-  color: var(--text-light);
-}
-
-input:focus,
-select:focus,
-textarea:focus {
+input:focus, select:focus, textarea:focus {
   outline: none;
   border-color: var(--primary-light);
   box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
@@ -409,21 +321,17 @@ textarea {
   border: none;
   font-size: 0.9rem;
   font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   cursor: pointer;
   transition: var(--transition);
-  color: white;
-  white-space: nowrap;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
   box-shadow: 0 8px 24px rgba(124, 58, 237, 0.25);
 }
 
@@ -433,23 +341,15 @@ textarea {
 }
 
 .btn-success {
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  background: linear-gradient(135deg, var(--accent), #059669);
+  color: white;
   box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
 }
 
 .btn-danger {
   background: linear-gradient(135deg, var(--danger), #dc2626);
+  color: white;
   box-shadow: 0 8px 24px rgba(239, 68, 68, 0.25);
-}
-
-.btn-warning {
-  background: linear-gradient(135deg, var(--warning), #d97706);
-  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
-}
-
-.btn-cheat {
-  background: linear-gradient(135deg, var(--cheat), #ea580c);
-  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
 }
 
 .btn-outline {
@@ -460,20 +360,19 @@ textarea {
 
 .btn-outline:hover {
   background: white;
-  border-color: var(--primary-light);
-  color: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-hover);
-}
-
-.btn-sm {
-  padding: 0.6rem 1rem;
-  font-size: 0.8rem;
-  min-height: 36px;
+  color: var(--primary);
+  border-color: var(--primary);
 }
 
 .btn-block {
   width: 100%;
+}
+
+.btn-cheat {
+  background: linear-gradient(135deg, var(--cheat), #ea580c);
+  color: white;
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
+  margin-top: 1rem;
 }
 
 /* Activity List */
@@ -481,36 +380,34 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin-top: 1rem;
   max-height: 400px;
   overflow-y: auto;
-  padding-right: 0.5rem;
 }
 
 .activity-item {
   background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border-radius: var(--radius-sm);
   border: 1px solid rgba(226, 232, 240, 0.8);
   padding: 1rem 1.25rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  align-items: center;
   transition: var(--transition);
+  border-left: 4px solid var(--primary);
 }
 
 .activity-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-hover);
+  transform: translateX(8px);
+  box-shadow: var(--shadow);
   background: white;
 }
 
+.activity-item.cheat-day {
+  border-left-color: var(--cheat);
+}
+
 .activity-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  flex: 1;
 }
 
 .activity-name {
@@ -521,15 +418,561 @@ textarea {
 
 .activity-meta {
   display: flex;
-  flex-wrap: wrap;
   gap: 0.75rem;
   font-size: 0.8rem;
   color: var(--text-muted);
+  margin-top: 0.25rem;
 }
 
 .activity-value {
   font-weight: 600;
   color: var(--accent);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1.25rem;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.stat-card-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, var(--primary-dark), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* Calendar */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.calendar-header {
+  display: contents;
+}
+
+.day-header {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem;
+}
+
+.day-cell {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.day-cell:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow);
+  z-index: 2;
+}
+
+.day-number {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.day-status {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+  opacity: 0.7;
+}
+
+.day-cell.completed {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: var(--accent);
+}
+
+.day-cell.missed {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: var(--danger);
+}
+
+.day-cell.today {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(139, 92, 246, 0.2));
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+}
+
+.day-cell.cheat-day {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(234, 88, 12, 0.15));
+  border-color: rgba(249, 115, 22, 0.4);
+  color: var(--cheat);
+}
+
+.day-cell.today::after {
+  content: 'TODAY';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 0.5rem;
+  padding: 0.15rem 0.35rem;
+  border-radius: 999px;
+  background: var(--primary);
+  color: white;
+}
+
+/* Chart */
+.chart-container {
+  position: relative;
+  height: 320px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.activity-chart-selector {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.activity-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.activity-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.activity-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+}
+
+/* Chart Tabs */
+.chart-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.35rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.chart-tab-btn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.chart-tab-btn:hover {
+  color: var(--primary);
+}
+
+.chart-tab-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+}
+
+/* Scroll Hint */
+.scroll-hint {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(226, 232, 240, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: bounce 2s infinite;
+}
+
+.scroll-hint i {
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.modal.active {
+  display: flex;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--card-bg);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.modal-close:hover {
+  background: var(--danger);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.modal-header-section {
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(139, 92, 246, 0.05));
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.modal-day-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.day-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 800;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
+}
+
+.day-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.modal-day-info {
+  flex: 1;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.modal-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.modal-status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.modal-status-badge.missed {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.modal-status-badge.cheat {
+  background: rgba(249, 115, 22, 0.15);
+  color: var(--cheat);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+.modal-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.modal-stat {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.modal-stat-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-stat-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, var(--primary-dark), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.25rem;
+}
+
+.modal-activities {
+  padding: 2rem;
+}
+
+.modal-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-section-title i {
+  color: var(--primary);
+}
+
+#modalActivitiesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-activity-item {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.modal-activity-item:hover {
+  transform: translateX(8px);
+  box-shadow: var(--shadow);
+}
+
+.modal-activity-item.cheat {
+  border-left-color: var(--cheat);
+}
+
+.modal-activity-left {
+  flex: 1;
+}
+
+.modal-activity-type {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.modal-activity-time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.modal-activity-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.modal-empty {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--text-muted);
+}
+
+.modal-empty i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.3;
+}
+
+.modal-actions {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(226, 232, 240, 0.5);
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.color-normal {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.color-cheat {
+  background: repeating-linear-gradient(45deg, var(--cheat), var(--cheat) 4px, #fed7aa 4px, #fed7aa 8px);
 }
 
 /* Empty State */
@@ -539,594 +982,10 @@ textarea {
   color: var(--text-muted);
 }
 
-.empty-state-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin: 0 auto 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(139, 92, 246, 0.1));
-  border: 1px solid rgba(124, 58, 237, 0.1);
-}
-
-/* Calendar Morph Styles */
-.calendar-morph-container {
-  position: relative;
-  min-height: 800px;
-  margin-bottom: 2rem;
-}
-
-.calendar-grid {
-  position: relative;
-  width: 100%;
-  transition: var(--morph-transition);
-  transform-origin: top center;
-}
-
-/* Calendar Header */
-.calendar-header {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.day-header {
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.75rem;
-  transition: all 0.3s ease;
-}
-
-/* Calendar Grid */
-.calendar-grid-initial {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 0.5rem;
-  position: relative;
-}
-
-.day-cell {
-  aspect-ratio: 1;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-
-.day-cell:hover {
-  transform: translateY(-3px) scale(1.05);
-  background: white;
-  box-shadow: var(--glass-shadow-hover);
-  z-index: 2;
-}
-
-.day-number {
-  font-size: 1.1rem;
-  font-weight: 700;
-  transition: all 0.3s ease;
-}
-
-.day-status {
-  margin-top: 0.25rem;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.8;
-  transition: all 0.3s ease;
-}
-
-.day-cell.completed {
-  background: var(--success-bg);
-  border-color: var(--success-border);
-  color: var(--accent);
-}
-
-.day-cell.missed {
-  background: var(--danger-bg);
-  border-color: var(--danger-border);
-  color: var(--danger);
-}
-
-.day-cell.cheat {
-  background: var(--cheat-bg);
-  border-color: var(--cheat-border);
-  color: var(--cheat);
-  animation: cheatGlow 2s infinite;
-}
-
-@keyframes cheatGlow {
-  0%, 100% { 
-    box-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
-  }
-  50% { 
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.6);
-  }
-}
-
-.day-cell.pending {
-  background: var(--pending-bg);
-  border-color: var(--pending-border);
-  color: var(--text-muted);
-}
-
-.day-cell.today {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(139, 92, 246, 0.2));
-  border-color: rgba(124, 58, 237, 0.4);
-  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
-  position: relative;
-}
-
-.day-cell.today::after {
-  content: 'TODAY';
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 0.6rem;
-  padding: 0.2rem 0.4rem;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-}
-
-.day-cell.cheat::before {
-  content: '🎯';
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  font-size: 0.8rem;
-}
-
-/* Timeline */
-.timeline {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  pointer-events: none;
-}
-
-.timeline.active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: all;
-}
-
-.timeline-header {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-.timeline-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.timeline-subtitle {
-  color: var(--text-muted);
-  font-size: 1rem;
-}
-
-.timeline-items {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.timeline-item {
-  display: flex;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-
-.timeline-item:hover {
-  transform: translateX(8px);
-  background: white;
-  box-shadow: var(--glass-shadow-hover);
-}
-
-.timeline-day {
-  min-width: 90px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0.75rem;
-  border-radius: var(--radius-sm);
-  font-weight: 700;
-  font-size: 1.25rem;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-.timeline-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.timeline-date {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-}
-
-.timeline-activity {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.timeline-meta {
-  display: flex;
-  gap: 1.25rem;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-.timeline-status {
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-/* Status colors for timeline */
-.timeline-item.completed .timeline-day {
-  background: var(--success-bg);
-  border-color: var(--success-border);
-  color: var(--accent);
-}
-
-.timeline-item.missed .timeline-day {
-  background: var(--danger-bg);
-  border-color: var(--danger-border);
-  color: var(--danger);
-}
-
-.timeline-item.cheat .timeline-day {
-  background: var(--cheat-bg);
-  border-color: var(--cheat-border);
-  color: var(--cheat);
-}
-
-.timeline-item.pending .timeline-day {
-  background: var(--pending-bg);
-  border-color: var(--pending-border);
-  color: var(--text-muted);
-}
-
-.timeline-item.completed .timeline-status {
-  background: var(--success-bg);
-  color: var(--accent);
-  border-color: var(--success-border);
-}
-
-.timeline-item.missed .timeline-status {
-  background: var(--danger-bg);
-  color: var(--danger);
-  border-color: var(--danger-border);
-}
-
-.timeline-item.cheat .timeline-status {
-  background: var(--cheat-bg);
-  color: var(--cheat);
-  border-color: var(--cheat-border);
-}
-
-.timeline-item.pending .timeline-status {
-  background: var(--pending-bg);
-  color: var(--text-muted);
-  border-color: var(--pending-border);
-}
-
-/* Morph Animation States */
-.calendar-grid.morphing {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  opacity: 0.3;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.calendar-grid.morphing .calendar-header {
-  opacity: 0;
-}
-
-/* Cheat Day Widget */
-.cheat-widget {
-  margin-top: 1.5rem;
-  padding: 1.25rem;
-  border-radius: var(--radius-sm);
-  background: var(--cheat-bg);
-  border: 1px solid var(--cheat-border);
-}
-
-.cheat-widget-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.empty-icon {
+  font-size: 3rem;
   margin-bottom: 1rem;
-}
-
-.cheat-widget-title {
-  font-weight: 600;
-  color: var(--cheat);
-}
-
-.cheat-widget-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-  text-align: center;
-}
-
-.cheat-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.cheat-stat-value {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--cheat);
-}
-
-.cheat-stat-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-/* Progress Bar */
-.progress-bar-inner {
-  height: 12px;
-  border-radius: 999px;
-  background: rgba(226, 232, 240, 0.8);
-  overflow: hidden;
-}
-
-.progress-inner {
-  height: 100%;
-  width: 0%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  transition: width 0.45s ease;
-}
-
-/* Tabs */
-.tabs {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  margin-bottom: 1.5rem;
-}
-
-.tab {
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  padding: 0.6rem 1.25rem;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.tab.active {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
-}
-
-/* Chart */
-.chart-container {
-  position: relative;
-  height: 300px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: var(--radius-sm);
-  padding: 1rem;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-/* Stats Grid */
-.stats-grid {
-  margin-top: 1.5rem;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.stat-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: var(--radius-sm);
-  padding: 1.25rem 1.5rem;
-  text-align: center;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  transition: var(--transition);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.stat-card:hover {
-  transform: translateY(-3px);
-  background: white;
-  box-shadow: var(--glass-shadow-hover);
-}
-
-.stat-card-value {
-  font-size: 1.75rem;
-  font-weight: 800;
-  background: linear-gradient(45deg, var(--primary-dark), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: all 0.3s ease-out;
-}
-
-.stat-card-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-}
-
-/* Achievements */
-.achievements-grid {
-  margin-top: 1.25rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 1rem;
-}
-
-.achievement-badge {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  padding: 1.25rem 1rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  transition: var(--transition);
-}
-
-.achievement-badge:hover {
-  transform: translateY(-2px);
-  background: white;
-  box-shadow: var(--glass-shadow-hover);
-}
-
-.achievement-badge.locked {
-  opacity: 0.6;
-  filter: grayscale(0.3);
-}
-
-.achievement-icon {
-  font-size: 2rem;
-  margin-bottom: 0.25rem;
-}
-
-.achievement-name {
-  font-weight: 600;
-  color: var(--text);
-}
-
-/* Verdict Badge */
-.verdict-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.9rem;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  transition: var(--transition);
-}
-
-.verdict-badge:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--glass-shadow-hover);
-}
-
-.verdict-poor {
-  color: #94a3b8;
-  border-color: #cbd5e1;
-}
-.verdict-good {
-  color: var(--accent);
-  border-color: var(--accent);
-  background: var(--success-bg);
-}
-.verdict-beast {
-  color: var(--danger);
-  border-color: var(--danger);
-  background: var(--danger-bg);
-}
-.verdict-evil {
-  color: var(--secondary);
-  border-color: var(--secondary);
-  background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(124,58,237,0.1));
-}
-.verdict-cheat {
-  color: var(--cheat);
-  border-color: var(--cheat);
-  background: var(--cheat-bg);
-  animation: cheatPulse 2s infinite;
-}
-
-@keyframes cheatPulse {
-  0%,100% { 
-    transform: scale(1); 
-    box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
-  }
-  50% { 
-    transform: scale(1.05); 
-    box-shadow: 0 0 25px rgba(249, 115, 22, 0.5);
-  }
+  opacity: 0.3;
 }
 
 /* Notification */
@@ -1139,339 +998,84 @@ textarea {
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
   border: var(--glass-border);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  box-shadow: var(--glass-shadow-hover);
+  box-shadow: var(--shadow-hover);
   transform: translateX(120%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1200;
+  transition: transform 0.3s ease;
+  z-index: 1000;
 }
 
 .notification.show {
   transform: translateX(0);
 }
 
+.notification-content {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+}
+
 .notification-icon {
   font-size: 1.5rem;
 }
 
-.notification-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.notification-message {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-top: 0.25rem;
-}
-
-.notification-close {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--text-light);
-  font-size: 1.25rem;
-  transition: var(--transition);
-}
-
-.notification-close:hover {
-  color: var(--text);
-}
-
-/* Modal */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(248, 250, 252, 0.95);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  z-index: 1100;
-}
-
-.modal.active {
-  display: flex;
-}
-
-.modal-content {
-  max-width: 520px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border-radius: var(--radius);
-  border: var(--glass-border);
-  padding: 2rem;
-  box-shadow: var(--glass-shadow-hover);
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.75rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-.modal-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.modal-close {
-  background: transparent;
-  border: none;
-  font-size: 1.75rem;
-  color: var(--text-light);
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.modal-close:hover {
-  color: var(--text);
-}
-
-/* Progress Indicator */
-.scroll-progress {
-  position: fixed;
-  top: 50%;
-  right: 2rem;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  z-index: 1000;
-}
-
-.progress-label {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-}
-
-.progress-bar {
-  width: 5px;
-  height: 200px;
-  background: rgba(226, 232, 240, 0.8);
-  border-radius: 2.5px;
-  overflow: hidden;
-  position: relative;
-}
-
-.progress-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: linear-gradient(to bottom, var(--primary), var(--secondary));
-  border-radius: 2.5px;
-  transition: height 0.3s ease;
-}
-
-/* Scroll Hint */
-.scroll-hint {
-  position: fixed;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  animation: bounce 2s infinite;
-  z-index: 1000;
-}
-
-.scroll-hint i {
-  font-size: 1.5rem;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  40% {
-    transform: translateX(-50%) translateY(-12px);
-  }
-  60% {
-    transform: translateX(-50%) translateY(-6px);
-  }
-}
-
-/* Legend */
-.legend {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.legend-color {
-  width: 14px;
-  height: 14px;
-  border-radius: 4px;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-/* Challenges */
-.challenges-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.challenge-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  padding: 1.25rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.challenge-card:hover {
-  transform: translateY(-3px);
-  background: white;
-  box-shadow: var(--glass-shadow-hover);
-  border-color: var(--primary-light);
-}
-
-.challenge-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.notification-text {
   flex: 1;
 }
 
-.challenge-name {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.notification-title {
   font-weight: 600;
-  font-size: 1rem;
-  color: var(--text);
+  margin-bottom: 0.25rem;
 }
 
-.challenge-name i {
-  color: var(--warning);
-}
-
-.challenge-sub {
+.notification-message {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
 
-.challenge-progress {
-  width: 100%;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(226, 232, 240, 0.8);
-  overflow: hidden;
+/* Mobile Navigation */
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  backdrop-filter: blur(40px);
+  border-top: var(--glass-border);
+  display: none;
+  justify-content: space-around;
+  padding: 0.75rem;
+  z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.challenge-progress-fill {
-  height: 100%;
-  width: 0%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  transition: width 0.45s ease;
+.mobile-nav button {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Scroll Animation */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+.mobile-nav button.active {
+  color: var(--primary);
+  background: rgba(124, 58, 237, 0.1);
+  transform: translateY(-8px);
 }
 
-.scroll-reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@keyframes statPulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-.stat-updated {
-  animation: statPulse 0.6s ease;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .container {
-    padding: 1.5rem;
-  }
-  
-  .stat-badge {
-    min-width: 90px;
-    padding: 0.85rem 1.25rem;
-  }
-  
-  .stat-value {
-    font-size: 1.5rem;
-  }
-}
-
+/* Responsive */
 @media (max-width: 768px) {
   header {
     padding: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     gap: 1rem;
-    position: relative;
-    top: 0;
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  
-  header::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .logo {
-    flex-shrink: 0;
-    gap: 0.75rem;
   }
   
   .logo-icon {
@@ -1482,108 +1086,53 @@ textarea {
   
   .logo-text {
     font-size: 1.3rem;
-    white-space: nowrap;
   }
   
   .header-stats {
-    flex: 0 0 auto;
-    justify-content: flex-start;
-    padding: 0;
-    min-width: min-content;
+    gap: 0.75rem;
   }
   
   .stat-badge {
     min-width: 85px;
     padding: 0.7rem 1rem;
-    flex-shrink: 0;
   }
   
   .stat-value {
-    font-size: 1.3rem;
-  }
-  
-  .stat-label {
-    font-size: 0.7rem;
-  }
-  
-  .view-controls {
-    flex-shrink: 0;
-    margin-left: auto;
-  }
-  
-  .view-btn {
-    padding: 0.7rem 1rem;
-    font-size: 0.85rem;
-    min-height: 42px;
+    font-size: 1.4rem;
   }
   
   .container {
     padding: 1rem;
   }
   
-  .card {
-    padding: 1.5rem;
+  .tabs {
+    display: none;
+  }
+  
+  .mobile-nav {
+    display: flex;
+  }
+  
+  body {
+    padding-bottom: 80px;
   }
   
   .form-row {
     grid-template-columns: 1fr;
   }
   
-  .calendar-grid-initial {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+  .calendar-grid {
+    grid-template-columns: repeat(5, 1fr);
   }
   
-  .calendar-header {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-  
-  .timeline-item {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .timeline-day {
-    min-width: auto;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .scroll-progress {
-    right: 1rem;
-  }
-  
-  .btn {
-    min-height: 42px;
-    padding: 0.8rem 1.5rem;
-    font-size: 0.85rem;
-  }
-  
-  input, select, textarea {
-    padding: 0.75rem;
-    font-size: 0.85rem;
-  }
-  
-  .cheat-widget-stats {
+  .stats-grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 640px) {
-  header {
-    gap: 0.75rem;
-    padding: 0.75rem;
-  }
-  
-  .logo-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-    border-radius: 16px;
-  }
-  
+@media (max-width: 480px) {
   .logo-text {
-    font-size: 1.2rem;
+    display: none;
   }
   
   .stat-badge {
@@ -1595,76 +1144,8 @@ textarea {
     font-size: 1.2rem;
   }
   
-  .view-btn {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.8rem;
-    min-height: 40px;
-  }
-  
-  .card {
-    padding: 1.25rem;
-  }
-  
-  .calendar-grid-initial {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-  
-  .calendar-header {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-  
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .activity-item {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.75rem;
-  }
-  
-  .btn-sm {
-    min-height: 34px;
-  }
-}
-
-@media (max-width: 480px) {
-  .calendar-grid-initial {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  
-  .calendar-header {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  
-  .logo-text {
-    display: none;
-  }
-  
-  .header-stats {
-    margin-left: 0.5rem;
-  }
-  
-  .stat-badge {
-    min-width: 70px;
-    padding: 0.5rem 0.7rem;
-  }
-  
-  .view-btn {
-    padding: 0.5rem 0.7rem;
-    font-size: 0.75rem;
-  }
-  
-  .view-btn i {
-    margin-right: 0.25rem;
-  }
-  
-  .view-btn span {
-    display: none;
-  }
-  
-  .card-title {
-    font-size: 1.1rem;
+  .calendar-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -1673,25 +1154,30 @@ textarea {
   width: 10px;
   height: 10px;
 }
+
 ::-webkit-scrollbar-track {
-  background: rgba(226, 232, 240, 0.5);
+  background: rgba(226, 232, 240, 0.3);
   border-radius: 5px;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+  background: linear-gradient(135deg, var(--primary-light), var(--secondary));
   border-radius: 5px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
 }
 </style>
 </head>
 <body>
-<header id="mainHeader">
+
+<header>
   <div class="logo">
     <div class="logo-icon">💪</div>
-    <div class="logo-text">Sam'sFit</div>
+    <div class="logo-text">Sam's Fit90</div>
   </div>
+  
   <div class="header-stats">
     <div class="stat-badge">
       <div class="stat-value" id="currentDay">1</div>
@@ -1702,2080 +1188,1003 @@ textarea {
       <div class="stat-label">Streak</div>
     </div>
     <div class="stat-badge">
-      <div class="stat-value" id="completionRate">0%</div>
-      <div class="stat-label">Complete</div>
+      <div class="stat-value" id="completion">0%</div>
+      <div class="stat-label">Done</div>
     </div>
     <div class="stat-badge">
-      <div class="stat-value" id="cheatDaysUsed">0</div>
-      <div class="stat-label">Cheat Days</div>
+      <div class="stat-value" id="totalActivities">0</div>
+      <div class="stat-label">Workouts</div>
     </div>
   </div>
-  <div class="view-controls">
-    <button class="view-btn active" id="gridView">
-      <i class="fas fa-th"></i> <span>Grid</span>
-    </button>
-    <button class="view-btn" id="timelineView">
-      <i class="fas fa-stream"></i> <span>Timeline</span>
-    </button>
-  </div>
+  
+  <button class="header-btn" onclick="resetChallenge()">
+    <i class="fas fa-redo"></i> Reset
+  </button>
 </header>
 
 <div class="container">
-  <main>
-    <!-- Today card -->
-    <div class="card">
-      <div class="card-header">
-        <div>
-          <h2 class="card-title">
-            <i class="fas fa-dumbbell"></i>
-            Today's Activities
-          </h2>
-          <p class="card-subtitle" id="todayDate">Loading...</p>
-        </div>
-        <div style="display: flex; gap: 0.75rem;">
-          <button class="btn btn-cheat" onclick="openCheatDayModal()">
-            <i class="fas fa-calendar-star"></i> Cheat Day
-          </button>
-          <button class="btn btn-success" onclick="openAddActivityModal()">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="dashboard">
+      <i class="fas fa-chart-bar"></i> Dashboard
+    </button>
+    <button class="tab-btn" data-tab="activities">
+      <i class="fas fa-list"></i> Activities
+    </button>
+    <button class="tab-btn" data-tab="calendar">
+      <i class="fas fa-calendar"></i> Calendar
+    </button>
+  </div>
+
+  <!-- DASHBOARD TAB -->
+  <div class="tab-content active" id="dashboard">
+    <div class="dashboard">
+      <div>
+        <!-- Log Activity Card -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-plus-circle"></i>
+              Log Today's Activity
+            </h2>
+          </div>
+          
+          <div class="form-group">
+            <label for="activityType">Activity Type</label>
+            <select id="activityType">
+              <option value="Running">🏃 Running</option>
+              <option value="Walking">🚶 Walking</option>
+              <option value="Push-ups">💪 Push-ups</option>
+              <option value="Pull-ups">🤸 Pull-ups</option>
+              <option value="Plank">🧘 Plank (seconds)</option>
+              <option value="Yoga">🧘‍♀️ Yoga</option>
+              <option value="Cycling">🚴 Cycling</option>
+              <option value="Swimming">🏊 Swimming</option>
+              <option value="Squats">🦵 Squats</option>
+              <option value="Weight Training">🏋️ Weight Training</option>
+            </select>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="activityValue">Value</label>
+              <input type="number" id="activityValue" placeholder="e.g., 30" min="0" step="0.1">
+            </div>
+            <div class="form-group">
+              <label for="activityUnit">Unit</label>
+              <select id="activityUnit">
+                <option value="km">Kilometers</option>
+                <option value="reps">Reps</option>
+                <option value="seconds">Seconds</option>
+                <option value="minutes">Minutes</option>
+                <option value="sets">Sets</option>
+              </select>
+            </div>
+          </div>
+          
+          <button class="btn btn-primary btn-block" onclick="addActivity()">
             <i class="fas fa-plus"></i> Add Activity
           </button>
-        </div>
-      </div>
-
-      <div class="activity-list" id="todayActivities">
-        <div class="empty-state">
-          <div class="empty-state-icon">
-            <i class="fas fa-clipboard-list"></i>
-          </div>
-          <p>No activities logged for today.</p>
-          <p style="font-size: 0.9rem; margin-top: 0.25rem;">
-            Start with a quick walk or a short plank session.
-          </p>
-        </div>
-      </div>
-
-      <div class="cheat-widget" id="cheatDayWidget" style="display: none;">
-        <div class="cheat-widget-header">
-          <i class="fas fa-crown" style="color: var(--cheat);"></i>
-          <div class="cheat-widget-title">Today is a Cheat Day! 🎯</div>
-        </div>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
-          Enjoy your rest day! No activities required. Your streak is protected.
-        </p>
-        <div class="cheat-widget-stats">
-          <div class="cheat-stat">
-            <div class="cheat-stat-value" id="cheatDaysTotal">3</div>
-            <div class="cheat-stat-label">Total Allowed</div>
-          </div>
-          <div class="cheat-stat">
-            <div class="cheat-stat-value" id="cheatDaysRemaining">2</div>
-            <div class="cheat-stat-label">Remaining</div>
-          </div>
-          <div class="cheat-stat">
-            <div class="cheat-stat-value" id="nextCheatDay">15</div>
-            <div class="cheat-stat-label">Next Cheat Day</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-row" style="margin-top: 1.5rem;">
-        <div class="form-group">
-          <label for="daySelect">Jump to Day</label>
-          <select id="daySelect" onchange="jumpToDay(this.value)"></select>
-        </div>
-        <div class="form-group" style="align-self: flex-end;">
-          <button class="btn btn-primary btn-block" onclick="logDayCompletion()">
-            <i class="fas fa-check-circle"></i> Mark Day Complete
+          
+          <button class="btn btn-cheat btn-block" onclick="toggleCheatDay()">
+            <i class="fas fa-utensils"></i> Toggle Cheat Day
           </button>
         </div>
+
+        <!-- Progress Chart Card -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-chart-bar"></i>
+              Activity Progress
+            </h2>
+          </div>
+          
+          <!-- Chart Type Tabs -->
+          <div class="chart-tabs">
+            <button class="chart-tab-btn active" data-chart="weekly" onclick="switchChartView('weekly')">
+              Weekly Trends
+            </button>
+            <button class="chart-tab-btn" data-chart="monthly" onclick="switchChartView('monthly')">
+              Monthly Overview
+            </button>
+            <button class="chart-tab-btn" data-chart="activity" onclick="switchChartView('activity')">
+              Activity Split
+            </button>
+          </div>
+          
+          <div id="activitySelector" class="activity-chart-selector"></div>
+          
+          <div class="chart-container">
+            <canvas id="activityChart"></canvas>
+          </div>
+          
+          <div class="scroll-hint" id="scrollHint">
+            <i class="fas fa-chevron-down"></i>
+            <span>Scroll to transform calendar</span>
+          </div>
+          
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-color color-normal"></div>
+              <span>Normal Day</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color color-cheat"></div>
+              <span>Cheat Day</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <!-- Stats Card -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-chart-line"></i>
+              Your Stats
+            </h2>
+          </div>
+          
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-card-value" id="daysCompleted">0</div>
+              <div class="stat-card-label">Days Done</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-value" id="cheatDays">0</div>
+              <div class="stat-card-label">Cheat Days</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-value" id="bestStreak">0</div>
+              <div class="stat-card-label">Best Streak</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-value" id="avgDaily">0.0</div>
+              <div class="stat-card-label">Avg/Day</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Activities -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-dumbbell"></i>
+              Today's Activities
+            </h2>
+          </div>
+          
+          <div class="activity-list" id="todayActivities">
+            <div class="empty-state">
+              <div class="empty-icon">
+                <i class="fas fa-clipboard-list"></i>
+              </div>
+              <p>No activities logged today</p>
+              <p style="font-size:0.85rem;margin-top:0.5rem;">Add your first activity above!</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- Charts -->
+  <!-- ACTIVITIES TAB -->
+  <div class="tab-content" id="activities">
     <div class="card">
-      <div class="tabs">
-        <button class="tab active" data-tab="weekly" onclick="switchTab('weekly')">Weekly Trends</button>
-        <button class="tab" data-tab="monthly" onclick="switchTab('monthly')">Monthly Overview</button>
-        <button class="tab" data-tab="activity" onclick="switchTab('activity')">Activity Split</button>
-      </div>
-      <div class="chart-container">
-        <canvas id="progressChart"></canvas>
-      </div>
-    </div>
-
-    <!-- Daily Verdict -->
-    <div class="card" id="verdictCard">
       <div class="card-header">
         <h2 class="card-title">
-          <i class="fas fa-gavel"></i>
-          TODAY'S VERDICT
+          <i class="fas fa-list"></i>
+          All Activities
         </h2>
       </div>
-      <div id="verdictContent">
-        <div id="verdictBadge" class="verdict-badge verdict-poor">NO DATA</div>
-        <p id="verdictText" style="margin-top:1rem;font-size:0.9rem;color:var(--text-muted);">
-          Log something today to unlock your verdict.
-        </p>
+      
+      <div class="activity-list" id="allActivities">
+        <div class="empty-state">
+          <div class="empty-icon">
+            <i class="fas fa-clipboard-list"></i>
+          </div>
+          <p>No activities logged yet</p>
+          <p style="font-size:0.85rem;margin-top:0.5rem;">Start your fitness journey today!</p>
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- Calendar with Morph Animation -->
+  <!-- CALENDAR TAB -->
+  <div class="tab-content" id="calendar">
     <div class="card">
       <div class="card-header">
         <h2 class="card-title">
           <i class="fas fa-calendar-alt"></i>
-          90-Day Calendar & Timeline
+          90-Day Calendar
         </h2>
-        <div class="legend">
-          <div class="legend-item">
-            <div class="legend-color" style="background: var(--success-bg); border-color: var(--success-border);"></div>
-            <span>Completed</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-color" style="background: var(--danger-bg); border-color: var(--danger-border);"></div>
-            <span>Missed</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-color" style="background: var(--cheat-bg); border-color: var(--cheat-border);"></div>
-            <span>Cheat Day</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-color" style="background: var(--pending-bg); border-color: var(--pending-border);"></div>
-            <span>Pending</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-color" style="background: rgba(124, 58, 237, 0.3); border-color: rgba(124, 58, 237, 0.6);"></div>
-            <span>Today</span>
-          </div>
+      </div>
+      
+      <div class="calendar-grid" id="calendarGrid">
+        <div class="calendar-header">
+          <div class="day-header">Mon</div>
+          <div class="day-header">Tue</div>
+          <div class="day-header">Wed</div>
+          <div class="day-header">Thu</div>
+          <div class="day-header">Fri</div>
+          <div class="day-header">Sat</div>
+          <div class="day-header">Sun</div>
         </div>
       </div>
       
-      <div class="calendar-morph-container">
-        <!-- Calendar Grid -->
-        <div class="calendar-grid" id="calendarGrid">
-          <div class="calendar-header">
-            <div class="day-header">Mon</div>
-            <div class="day-header">Tue</div>
-            <div class="day-header">Wed</div>
-            <div class="day-header">Thu</div>
-            <div class="day-header">Fri</div>
-            <div class="day-header">Sat</div>
-            <div class="day-header">Sun</div>
-          </div>
-          
-          <div class="calendar-grid-initial" id="calendarCells">
-            <!-- Calendar cells will be generated by JavaScript -->
-          </div>
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-color" style="background:rgba(16, 185, 129, 0.15);border:1px solid rgba(16, 185, 129, 0.4);"></div>
+          <span>Completed</span>
         </div>
-        
-        <!-- Timeline -->
-        <div class="timeline" id="timeline">
-          <div class="timeline-header">
-            <h3 class="timeline-title">Your 90-Day Journey</h3>
-            <p class="timeline-subtitle">Scroll through your fitness progress day by day</p>
-          </div>
-          
-          <div class="timeline-items" id="timelineItems">
-            <!-- Timeline items will be generated by JavaScript -->
-          </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background:rgba(239, 68, 68, 0.15);border:1px solid rgba(239, 68, 68, 0.4);"></div>
+          <span>Missed</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background:rgba(124, 58, 237, 0.2);border:2px solid var(--primary);"></div>
+          <span>Today</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background:rgba(249, 115, 22, 0.15);border:1px solid rgba(249, 115, 22, 0.4);"></div>
+          <span>Cheat Day</span>
         </div>
       </div>
     </div>
-
-    <!-- Challenges -->
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title">
-          <i class="fas fa-trophy"></i>
-          Active Challenges
-        </h2>
-        <button class="btn btn-outline" onclick="openJoinChallengeModal()">
-          <i class="fas fa-plus"></i> Join Challenge
-        </button>
-      </div>
-      <div class="challenges-grid" id="activeChallenges"></div>
-    </div>
-  </main>
-
-  <aside>
-    <!-- Stats -->
-    <div class="card">
-      <h2 class="card-title">
-        <i class="fas fa-chart-line"></i>
-        Dashboard Stats
-      </h2>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-card-value" id="totalDaysCompleted">0</div>
-          <div class="stat-card-label">Days Done</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-value" id="totalMinutes">0</div>
-          <div class="stat-card-label">Est. Minutes</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-value" id="avgDailyActivities">0.0</div>
-          <div class="stat-card-label">Avg / Day</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-value" id="bestStreak">0</div>
-          <div class="stat-card-label">Best Streak</div>
-        </div>
-      </div>
-
-      <div style="margin-top:1.75rem;">
-        <div class="form-group">
-          <label>Overall Progress</label>
-          <div class="progress-bar-inner">
-            <div id="overallProgress" class="progress-inner"></div>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">
-            <span>Day <span id="progressCurrentDay">1</span></span>
-            <span><span id="progressPercent">0%</span> done</span>
-            <span>Day 90</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Cheat Day Stats -->
-      <div class="cheat-widget" style="margin-top: 1.5rem;">
-        <div class="cheat-widget-header">
-          <i class="fas fa-crown"></i>
-          <div class="cheat-widget-title">Cheat Day Stats</div>
-        </div>
-        <div class="cheat-widget-stats">
-          <div class="cheat-stat">
-            <div class="cheat-stat-value" id="cheatDaysUsedStats">0</div>
-            <div class="cheat-stat-label">Used</div>
-          </div>
-          <div class="cheat-stat">
-            <div class="cheat-stat-value" id="cheatDaysRemainingStats">3</div>
-            <div class="cheat-stat-label">Remaining</div>
-          </div>
-          <div class="cheat-stat">
-            <div class="cheat-stat-value" id="cheatDayFrequency">7</div>
-            <div class="cheat-stat-label">Every N Days</div>
-          </div>
-        </div>
-        <button class="btn btn-cheat btn-block" style="margin-top: 1rem;" onclick="openCheatDayModal()">
-          <i class="fas fa-calendar-plus"></i> Manage Cheat Days
-        </button>
-      </div>
-    </div>
-
-    <!-- Recent -->
-    <div class="card">
-      <h2 class="card-title">
-        <i class="fas fa-history"></i>
-        Recent Activities
-      </h2>
-      <div class="activity-list" id="recentActivities"></div>
-    </div>
-
-    <!-- Achievements -->
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title">
-          <i class="fas fa-medal"></i>
-          Achievements
-        </h2>
-        <span id="achievementsCount"
-          style="background:linear-gradient(135deg, var(--primary), var(--secondary));color:white;padding:0.35rem 0.75rem;border-radius:var(--radius-sm);font-size:0.8rem;font-weight:600;">
-          0/6
-        </span>
-      </div>
-      <div class="achievements-grid" id="achievementsList"></div>
-    </div>
-
-    <!-- Quick actions -->
-    <div class="card">
-      <h2 class="card-title">
-        <i class="fas fa-bolt"></i>
-        Quick Actions
-      </h2>
-      <div style="display:grid;gap:0.85rem;margin-top:1.25rem;">
-        <button class="btn btn-outline" onclick="setReminder()">
-          <i class="fas fa-bell"></i> Set Daily Reminder
-        </button>
-        <button class="btn btn-outline" onclick="exportData()">
-          <i class="fas fa-download"></i> Export Data (JSON)
-        </button>
-        <button class="btn btn-outline" onclick="shareProgress()">
-          <i class="fas fa-share-alt"></i> Share Progress
-        </button>
-        <button class="btn btn-danger" onclick="resetChallenge()">
-          <i class="fas fa-redo"></i> Reset Challenge
-        </button>
-      </div>
-    </div>
-  </aside>
-</div>
-
-<!-- Add Activity Modal -->
-<div class="modal" id="addActivityModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 class="modal-title">Add Activity</h3>
-      <button class="modal-close" onclick="closeModal('addActivityModal')">&times;</button>
-    </div>
-
-    <form id="activityForm" onsubmit="saveActivity(event)">
-      <div class="form-group">
-        <label for="activityType">Activity Type</label>
-        <select id="activityType" required>
-          <option value="">Select an activity</option>
-          <option value="Walking">🚶 Walking</option>
-          <option value="Running">🏃 Running</option>
-          <option value="Push-ups">💪 Push-ups</option>
-          <option value="Squats">🦵 Squats</option>
-          <option value="Plank">🧘 Plank</option>
-          <option value="Yoga">🧘‍♀️ Yoga</option>
-          <option value="Cycling">🚴 Cycling</option>
-          <option value="Swimming">🏊 Swimming</option>
-          <option value="Weight Training">🏋️ Weight Training</option>
-          <option value="custom">✨ Custom Activity</option>
-        </select>
-      </div>
-
-      <div class="form-group" id="customActivityGroup" style="display:none;">
-        <label for="customActivityName">Custom Activity Name</label>
-        <input type="text" id="customActivityName" placeholder="e.g., HIIT, Dance, Sports">
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="activityValue">Value</label>
-          <input type="number" id="activityValue" min="1" required placeholder="e.g., 30">
-        </div>
-        <div class="form-group">
-          <label for="activityUnit">Unit</label>
-          <select id="activityUnit" required>
-            <option value="minutes">Minutes</option>
-            <option value="reps">Reps</option>
-            <option value="steps">Steps</option>
-            <option value="km">Kilometers</option>
-            <option value="sets">Sets</option>
-            <option value="custom">Custom</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group" id="customUnitGroup" style="display:none;">
-        <label for="customUnitName">Custom Unit</label>
-        <input type="text" id="customUnitName" placeholder="e.g., rounds, laps">
-      </div>
-
-      <div class="form-group">
-        <label for="activityNotes">Notes (Optional)</label>
-        <textarea id="activityNotes" placeholder="How did it feel? Any notes or variations?"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="activityDay">Day</label>
-        <select id="activityDay"></select>
-      </div>
-
-      <div class="form-row" style="margin-top:1rem;">
-        <button type="submit" class="btn btn-primary btn-block">
-          <i class="fas fa-save"></i> Save Activity
-        </button>
-      </div>
-    </form>
   </div>
 </div>
 
-<!-- Cheat Day Modal -->
-<div class="modal" id="cheatDayModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 class="modal-title">
-        <i class="fas fa-crown"></i>
-        Manage Cheat Days
+<!-- Day Details Modal -->
+<div class="modal" id="dayModal">
+  <div class="modal-overlay" onclick="closeDayModal()"></div>
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeDayModal()">
+      <i class="fas fa-times"></i>
+    </button>
+    
+    <div class="modal-header-section">
+      <div class="modal-day-badge" id="modalDayBadge">
+        <div class="day-circle">1</div>
+        <div class="day-label">Day</div>
+      </div>
+      <div class="modal-day-info">
+        <h2 class="modal-title" id="modalTitle">Day 1 Details</h2>
+        <p class="modal-subtitle" id="modalSubtitle">Monday, Jan 15, 2025</p>
+      </div>
+      <div class="modal-status-badge" id="modalStatus">COMPLETED</div>
+    </div>
+    
+    <div class="modal-stats-row" id="modalStatsRow">
+      <div class="modal-stat">
+        <div class="modal-stat-icon">💪</div>
+        <div class="modal-stat-value" id="modalActivityCount">0</div>
+        <div class="modal-stat-label">Activities</div>
+      </div>
+      <div class="modal-stat">
+        <div class="modal-stat-icon">⏱️</div>
+        <div class="modal-stat-value" id="modalTotalTime">0</div>
+        <div class="modal-stat-label">Minutes</div>
+      </div>
+      <div class="modal-stat">
+        <div class="modal-stat-icon">🔥</div>
+        <div class="modal-stat-value" id="modalStreak">0</div>
+        <div class="modal-stat-label">Streak</div>
+      </div>
+    </div>
+    
+    <div class="modal-activities" id="modalActivities">
+      <h3 class="modal-section-title">
+        <i class="fas fa-list-check"></i>
+        Activities Log
       </h3>
-      <button class="modal-close" onclick="closeModal('cheatDayModal')">&times;</button>
+      <div id="modalActivitiesList"></div>
     </div>
-
-    <div class="form-group">
-      <label>Cheat Days Allowed</label>
-      <select id="cheatDayLimit" onchange="updateCheatDaySettings()">
-        <option value="0">None (Strict Mode)</option>
-        <option value="3" selected>3 Days (Recommended)</option>
-        <option value="5">5 Days (Flexible)</option>
-        <option value="7">7 Days (Very Flexible)</option>
-        <option value="10">10 Days (Maximum)</option>
-      </select>
-      <small style="color: var(--text-muted); margin-top: 0.25rem; display: block;">
-        Cheat days protect your streak and allow planned rest days.
-      </small>
-    </div>
-
-    <div class="form-group">
-      <label>Schedule Cheat Day for Today</label>
-      <div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 0.5rem;">
-        <button class="btn btn-cheat btn-block" onclick="setTodayAsCheatDay()" id="setCheatDayBtn">
-          <i class="fas fa-calendar-star"></i> Set Today as Cheat Day
-        </button>
-        <button class="btn btn-outline" onclick="removeCheatDay(tracker.currentDay)" id="removeCheatDayBtn" style="display: none;">
-          <i class="fas fa-times"></i> Remove
-        </button>
-      </div>
-      <small style="color: var(--text-muted); margin-top: 0.5rem; display: block;">
-        Today is Day <span id="currentDayDisplay">1</span>. Marking as cheat day will protect your streak.
-      </small>
-    </div>
-
-    <div class="form-group">
-      <label>Scheduled Cheat Days</label>
-      <div class="activity-list" style="max-height: 200px;" id="scheduledCheatDays">
-        <!-- Cheat days will be listed here -->
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Auto-Schedule Cheat Days</label>
-      <select id="autoScheduleFrequency" onchange="autoScheduleCheatDays()">
-        <option value="0">Manual Only</option>
-        <option value="7">Every 7 Days</option>
-        <option value="10">Every 10 Days</option>
-        <option value="14">Every 14 Days</option>
-      </select>
-      <button class="btn btn-outline btn-block" style="margin-top: 0.75rem;" onclick="autoScheduleCheatDays()">
-        <i class="fas fa-magic"></i> Auto-Schedule Now
-      </button>
-    </div>
-
-    <div class="form-row" style="margin-top: 1.5rem;">
-      <button class="btn btn-primary btn-block" onclick="closeModal('cheatDayModal')">
+    
+    <div class="modal-actions">
+      <button class="btn btn-outline btn-block" onclick="closeDayModal()">
         <i class="fas fa-check"></i> Done
       </button>
     </div>
   </div>
 </div>
 
-<!-- Edit Activity Modal -->
-<div class="modal" id="editActivityModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 class="modal-title">Edit Activity</h3>
-      <button class="modal-close" onclick="closeModal('editActivityModal')">&times;</button>
-    </div>
-
-    <form id="editActivityForm" onsubmit="updateActivity(event)">
-      <input type="hidden" id="editActivityId">
-
-      <div class="form-group">
-        <label for="editActivityType">Activity Type</label>
-        <select id="editActivityType" required>
-          <option value="">Select an activity</option>
-          <option value="Walking">🚶 Walking</option>
-          <option value="Running">🏃 Running</option>
-          <option value="Push-ups">💪 Push-ups</option>
-          <option value="Squats">🦵 Squats</option>
-          <option value="Plank">🧘 Plank</option>
-          <option value="Yoga">🧘‍♀️ Yoga</option>
-          <option value="Cycling">🚴 Cycling</option>
-          <option value="Swimming">🏊 Swimming</option>
-          <option value="Weight Training">🏋️ Weight Training</option>
-          <option value="custom">✨ Custom Activity</option>
-        </select>
-      </div>
-
-      <div class="form-group" id="editCustomActivityGroup" style="display:none;">
-        <label for="editCustomActivityName">Custom Activity Name</label>
-        <input type="text" id="editCustomActivityName">
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="editActivityValue">Value</label>
-          <input type="number" id="editActivityValue" min="1" required>
-        </div>
-        <div class="form-group">
-          <label for="editActivityUnit">Unit</label>
-          <select id="editActivityUnit" required>
-            <option value="minutes">Minutes</option>
-            <option value="reps">Reps</option>
-            <option value="steps">Steps</option>
-            <option value="km">Kilometers</option>
-            <option value="sets">Sets</option>
-            <option value="custom">Custom</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group" id="editCustomUnitGroup" style="display:none;">
-        <label for="editCustomUnitName">Custom Unit</label>
-        <input type="text" id="editCustomUnitName">
-      </div>
-
-      <div class="form-group">
-        <label for="editActivityNotes">Notes</label>
-        <textarea id="editActivityNotes"></textarea>
-      </div>
-
-      <div class="form-row" style="margin-top:1rem;">
-        <button type="submit" class="btn btn-primary">
-          <i class="fas fa-check"></i> Update
-        </button>
-        <button type="button" class="btn btn-danger" onclick="deleteActivityFromEdit()">
-          <i class="fas fa-trash"></i> Delete
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Join Challenge Modal -->
-<div class="modal" id="joinChallengeModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 class="modal-title">Join a Challenge</h3>
-      <button class="modal-close" onclick="closeModal('joinChallengeModal')">&times;</button>
-    </div>
-
-    <div class="challenges-grid">
-      <div class="challenge-card" onclick="joinChallenge('pushup30')">
-        <div class="challenge-info">
-          <div class="challenge-name">
-            <i class="fas fa-fire"></i> 30-Day Push-up Challenge
-          </div>
-          <div class="challenge-sub">100 push-ups daily for 30 days</div>
-          <div class="challenge-progress">
-            <div class="challenge-progress-fill" data-challenge="pushup30"></div>
-          </div>
-        </div>
-        <button class="btn btn-sm btn-outline">Join</button>
-      </div>
-
-      <div class="challenge-card" onclick="joinChallenge('walking60')">
-        <div class="challenge-info">
-          <div class="challenge-name">
-            <i class="fas fa-walking"></i> 60-Day Walking Challenge
-          </div>
-          <div class="challenge-sub">10,000 steps daily for 60 days</div>
-          <div class="challenge-progress">
-            <div class="challenge-progress-fill" data-challenge="walking60"></div>
-          </div>
-        </div>
-        <button class="btn btn-sm btn-outline">Join</button>
-      </div>
-
-      <div class="challenge-card" onclick="joinChallenge('plank90')">
-        <div class="challenge-info">
-          <div class="challenge-name">
-            <i class="fas fa-clock"></i> 90-Day Plank Challenge
-          </div>
-          <div class="challenge-sub">Increase plank from 30s to 5 min</div>
-          <div class="challenge-progress">
-            <div class="challenge-progress-fill" data-challenge="plank90"></div>
-          </div>
-        </div>
-        <button class="btn btn-sm btn-outline">Join</button>
-      </div>
-    </div>
-
-    <div style="margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid rgba(226, 232, 240, 0.8);">
-      <h4 style="font-size:1rem;margin-bottom:1rem;">Custom Challenge</h4>
-      <button class="btn btn-outline btn-block" onclick="createCustomChallenge()">
-        <i class="fas fa-plus"></i> Create Custom Challenge
-      </button>
-    </div>
-  </div>
+<!-- Mobile Navigation -->
+<div class="mobile-nav">
+  <button class="active" data-tab="dashboard">
+    <i class="fas fa-chart-bar"></i>
+  </button>
+  <button data-tab="activities">
+    <i class="fas fa-list"></i>
+  </button>
+  <button data-tab="calendar">
+    <i class="fas fa-calendar"></i>
+  </button>
 </div>
 
 <!-- Notification -->
 <div class="notification" id="notification">
-  <div class="notification-icon"></div>
-  <div style="flex:1;">
-    <div class="notification-title"></div>
-    <div class="notification-message"></div>
+  <div class="notification-content">
+    <div class="notification-icon"></div>
+    <div class="notification-text">
+      <div class="notification-title"></div>
+      <div class="notification-message"></div>
+    </div>
   </div>
-  <button class="notification-close" onclick="hideNotification()">&times;</button>
-</div>
-
-<!-- Progress Indicator -->
-<div class="scroll-progress">
-  <div class="progress-label">SCROLL TO MORPH</div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-</div>
-
-<!-- Scroll Hint -->
-<div class="scroll-hint">
-  <i class="fas fa-chevron-down"></i>
-  <span>Scroll to transform calendar</span>
 </div>
 
 <script>
-// ============ CHEAT DAY SYSTEM ============
+// Data structure
+let tracker = {
+  startDate: new Date().toISOString().split('T')[0],
+  activities: [],
+  cheatDays: {}
+};
 
-class CheatDaySystem {
-  constructor() {
-    this.defaultSettings = {
-      cheatDaysAllowed: 3,
-      cheatDaysUsed: [],
-      autoScheduleFrequency: 0,
-      nextCheatDaySuggestion: null
-    };
-  }
+let chart = null;
+let selectedActivity = null;
+let currentChartView = 'weekly'; // 'weekly', 'monthly', 'activity'
 
-  init() {
-    if (!tracker.cheatDays) {
-      tracker.cheatDays = { ...this.defaultSettings };
-      tracker.cheatDays.cheatDaysUsed = [];
+// Load data
+function loadData() {
+  const saved = localStorage.getItem('fit90_tracker');
+  if (saved) {
+    try {
+      tracker = JSON.parse(saved);
+    } catch (e) {
+      console.error('Failed to load data:', e);
     }
-  }
-
-  isCheatDay(day) {
-    return tracker.cheatDays.cheatDaysUsed.includes(day);
-  }
-
-  setCheatDay(day) {
-    if (!this.canAddCheatDay(day)) {
-      return false;
-    }
-    
-    if (!this.isCheatDay(day)) {
-      tracker.cheatDays.cheatDaysUsed.push(day);
-      tracker.cheatDays.cheatDaysUsed.sort((a, b) => a - b);
-      saveState();
-      return true;
-    }
-    return false;
-  }
-
-  removeCheatDay(day) {
-    const index = tracker.cheatDays.cheatDaysUsed.indexOf(day);
-    if (index > -1) {
-      tracker.cheatDays.cheatDaysUsed.splice(index, 1);
-      saveState();
-      return true;
-    }
-    return false;
-  }
-
-  canAddCheatDay(day) {
-    // Check if day is in the future or today
-    if (day > tracker.currentDay) {
-      showNotification('Future Day', 'You can only schedule cheat days for today or past days.', 'warning');
-      return false;
-    }
-    
-    // Check if already a cheat day
-    if (this.isCheatDay(day)) {
-      showNotification('Already Cheat Day', 'This day is already marked as a cheat day.', 'info');
-      return false;
-    }
-    
-    // Check limit
-    if (tracker.cheatDays.cheatDaysUsed.length >= tracker.cheatDays.cheatDaysAllowed) {
-      showNotification('Limit Reached', `You've used all ${tracker.cheatDays.cheatDaysAllowed} cheat days.`, 'warning');
-      return false;
-    }
-    
-    return true;
-  }
-
-  getCheatDaysRemaining() {
-    return Math.max(0, tracker.cheatDays.cheatDaysAllowed - tracker.cheatDays.cheatDaysUsed.length);
-  }
-
-  getNextSuggestedCheatDay() {
-    if (tracker.cheatDays.cheatDaysUsed.length === 0) {
-      return Math.min(tracker.currentDay + 7, 90);
-    }
-    
-    const lastCheatDay = Math.max(...tracker.cheatDays.cheatDaysUsed);
-    const suggestion = lastCheatDay + 7;
-    
-    if (suggestion > 90) return null;
-    if (suggestion <= tracker.currentDay) return tracker.currentDay + 1;
-    
-    return suggestion;
-  }
-
-  autoScheduleCheatDays(frequency = 7) {
-    if (frequency === 0) return [];
-    
-    const scheduledDays = [];
-    let day = frequency;
-    
-    while (day <= 90) {
-      if (!this.isCheatDay(day) && this.canAddCheatDay(day)) {
-        this.setCheatDay(day);
-        scheduledDays.push(day);
-      }
-      day += frequency;
-    }
-    
-    return scheduledDays;
-  }
-
-  updateSettings(settings) {
-    tracker.cheatDays = { ...tracker.cheatDays, ...settings };
-    
-    // If we reduced allowed cheat days, remove excess
-    if (tracker.cheatDays.cheatDaysUsed.length > tracker.cheatDays.cheatDaysAllowed) {
-      tracker.cheatDays.cheatDaysUsed = tracker.cheatDays.cheatDaysUsed
-        .slice(0, tracker.cheatDays.cheatDaysAllowed)
-        .sort((a, b) => a - b);
-    }
-    
-    saveState();
-    return true;
-  }
-
-  getStats() {
-    return {
-      used: tracker.cheatDays.cheatDaysUsed.length,
-      allowed: tracker.cheatDays.cheatDaysAllowed,
-      remaining: this.getCheatDaysRemaining(),
-      nextSuggestion: this.getNextSuggestedCheatDay(),
-      frequency: tracker.cheatDays.autoScheduleFrequency
-    };
   }
 }
 
-// ============ DATA MANAGEMENT ============
+// Save data
+function saveData() {
+  localStorage.setItem('fit90_tracker', JSON.stringify(tracker));
+}
 
-const STORAGE_KEY = 'fit90_state_v5';
-let tracker = null;
-let chartInstance = null;
-let scrollAnimationSystem = null;
-const cheatDaySystem = new CheatDaySystem();
+// Get current day
+function getCurrentDay() {
+  const start = new Date(tracker.startDate);
+  const today = new Date();
+  const diffTime = today - start;
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  return Math.max(1, Math.min(90, diffDays + 1));
+}
 
-function loadState() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      return {
-        activities: [],
-        days: {},
-        challenges: {},
-        dayVerdicts: {},
-        cheatDays: {
-          cheatDaysAllowed: 3,
-          cheatDaysUsed: [],
-          autoScheduleFrequency: 0,
-          nextCheatDaySuggestion: null
-        },
-        startDate: new Date().toISOString().split('T')[0]
-      };
-    }
-    const parsed = JSON.parse(raw);
-    
-    // Ensure cheatDays structure exists
-    if (!parsed.cheatDays) {
-      parsed.cheatDays = {
-        cheatDaysAllowed: 3,
-        cheatDaysUsed: [],
-        autoScheduleFrequency: 0,
-        nextCheatDaySuggestion: null
-      };
-    }
-    
-    // Ensure other structures exist
-    if (!parsed.dayVerdicts) parsed.dayVerdicts = {};
-    if (!parsed.challenges) parsed.challenges = {};
-    if (!parsed.days) parsed.days = {};
-    if (!parsed.startDate) parsed.startDate = new Date().toISOString().split('T')[0];
-    
-    return parsed;
-  } catch {
-    return {
-      activities: [],
-      days: {},
-      challenges: {},
-      dayVerdicts: {},
-      cheatDays: {
-        cheatDaysAllowed: 3,
-        cheatDaysUsed: [],
-        autoScheduleFrequency: 0,
-        nextCheatDaySuggestion: null
-      },
-      startDate: new Date().toISOString().split('T')[0]
-    };
+// Add activity
+function addActivity() {
+  const type = document.getElementById('activityType').value;
+  const value = parseFloat(document.getElementById('activityValue').value);
+  const unit = document.getElementById('activityUnit').value;
+  
+  if (!value || value <= 0) {
+    showNotification('⚠️', 'Invalid Value', 'Please enter a valid number');
+    return;
   }
-}
-
-function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tracker));
-}
-
-// ============ INITIALIZATION ============
-
-document.addEventListener('DOMContentLoaded', () => {
-  tracker = loadState();
-  cheatDaySystem.init();
-
-  initUI();
+  
+  const currentDay = getCurrentDay();
+  const activity = {
+    id: Date.now().toString(),
+    day: currentDay,
+    type,
+    value,
+    unit,
+    timestamp: new Date().toISOString()
+  };
+  
+  tracker.activities.push(activity);
+  saveData();
+  
+  document.getElementById('activityValue').value = '';
+  
   updateAll();
-
-  // Event listeners for form elements
-  document.getElementById('activityType').addEventListener('change', e => {
-    document.getElementById('customActivityGroup').style.display =
-      e.target.value === 'custom' ? 'block' : 'none';
-  });
-
-  document.getElementById('activityUnit').addEventListener('change', e => {
-    document.getElementById('customUnitGroup').style.display =
-      e.target.value === 'custom' ? 'block' : 'none';
-  });
-
-  document.getElementById('editActivityType').addEventListener('change', e => {
-    document.getElementById('editCustomActivityGroup').style.display =
-      e.target.value === 'custom' ? 'block' : 'none';
-  });
-
-  document.getElementById('editActivityUnit').addEventListener('change', e => {
-    document.getElementById('editCustomUnitGroup').style.display =
-      e.target.value === 'custom' ? 'block' : 'none';
-  });
-
-  // Welcome notification
-  setTimeout(() => {
-    if (cheatDaySystem.isCheatDay(tracker.currentDay)) {
-      showNotification(
-        'Cheat Day Active! 🎯',
-        'Today is a planned rest day. Enjoy your recovery!',
-        'success'
-      );
-    } else {
-      showNotification(
-        'Welcome to Fit90',
-        'Add one small activity today. Consistency beats intensity.',
-        'info'
-      );
-    }
-  }, 900);
-});
-
-// ============ UI INITIALIZATION ============
-
-function initUI() {
-  const today = new Date();
-  const dateOptions = { weekday: 'short', month: 'short', day: 'numeric' };
-  document.getElementById('todayDate').textContent = today.toLocaleDateString(undefined, dateOptions);
-
-  const daySelect = document.getElementById('daySelect');
-  const activityDaySelect = document.getElementById('activityDay');
-  daySelect.innerHTML = '';
-  activityDaySelect.innerHTML = '';
-
-  for (let i = 1; i <= 90; i++) {
-    const opt1 = document.createElement('option');
-    opt1.value = i;
-    opt1.textContent = `Day ${i}`;
-    daySelect.appendChild(opt1);
-
-    const opt2 = document.createElement('option');
-    opt2.value = i;
-    opt2.textContent = `Day ${i}`;
-    activityDaySelect.appendChild(opt2);
-  }
+  showNotification('✅', 'Activity Added', `${value} ${unit} of ${type} logged!`);
   
-  // Set current day as default
-  daySelect.value = tracker.currentDay;
-  activityDaySelect.value = tracker.currentDay;
+  // Confetti for milestones
+  const dayActivities = tracker.activities.filter(a => a.day === currentDay);
+  if (dayActivities.length === 1 || dayActivities.length === 5) {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }
 }
 
-// ============ CORE UPDATE FUNCTION ============
+// Toggle cheat day
+function toggleCheatDay() {
+  const day = getCurrentDay();
+  tracker.cheatDays[day] = !tracker.cheatDays[day];
+  saveData();
+  updateAll();
+  
+  const message = tracker.cheatDays[day] ? 
+    'Cheat day activated 🍕' : 
+    'Cheat day removed';
+  showNotification('🍔', 'Cheat Day', message);
+}
 
+// Delete activity
+function deleteActivity(id) {
+  if (!confirm('Delete this activity?')) return;
+  
+  tracker.activities = tracker.activities.filter(a => a.id !== id);
+  saveData();
+  updateAll();
+  showNotification('🗑️', 'Deleted', 'Activity removed');
+}
+
+// Reset challenge
+function resetChallenge() {
+  if (!confirm('Reset all data? This cannot be undone!')) return;
+  
+  localStorage.removeItem('fit90_tracker');
+  location.reload();
+}
+
+// Update all UI
 function updateAll() {
-  tracker.currentDay = getCurrentDayIndex();
-  document.getElementById('currentDay').textContent = tracker.currentDay;
-  document.getElementById('daySelect').value = tracker.currentDay;
-  document.getElementById('activityDay').value = tracker.currentDay;
-  document.getElementById('progressCurrentDay').textContent = tracker.currentDay;
-
-  renderTodayActivities();
-  renderRecentActivities();
   updateStats();
-  updateAchievements();
-  updateChallengesUI();
-  updateChart();
-  updateDailyVerdict();
-  updateCheatDayUI();
-  
-  initCalendarMorph();
+  buildActivityButtons();
+  renderChart();
+  renderTodayActivities();
+  renderAllActivities();
+  renderCalendar();
 }
 
-function getCurrentDayIndex() {
-  const start = new Date(tracker.startDate + 'T00:00:00');
-  const today = new Date();
-  const diffMs = today - start;
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1;
-  return Math.min(Math.max(diffDays, 1), 90);
-}
-
-// ============ ACTIVITY MANAGEMENT ============
-
-function renderTodayActivities() {
-  const container = document.getElementById('todayActivities');
-  const todayActivities = tracker.activities.filter(a => a.day === tracker.currentDay);
-  
-  // Don't show activity list if it's a cheat day
-  if (cheatDaySystem.isCheatDay(tracker.currentDay)) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-state-icon" style="background: var(--cheat-bg); border-color: var(--cheat-border);">
-          <i class="fas fa-crown" style="color: var(--cheat);"></i>
-        </div>
-        <p>Today is a Cheat Day! 🎯</p>
-        <p style="font-size: 0.9rem; margin-top: 0.25rem;">
-          No activities required. Enjoy your planned rest day.
-        </p>
-      </div>
-    `;
-    return;
-  }
-
-  if (!todayActivities.length) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-state-icon"><i class="fas fa-clipboard-list"></i></div>
-        <p>No activities logged for today.</p>
-        <p style="font-size:0.9rem;margin-top:0.25rem;">Add one small win now.</p>
-      </div>
-    `;
-    return;
-  }
-
-  const dayMode = computeDailyMode(tracker.currentDay);
-  const modeClass =
-    dayMode === 'POOR' ? 'activity-mode-poor' :
-    dayMode === 'GOOD' ? 'activity-mode-good' :
-    dayMode === 'BEAST' ? 'activity-mode-beast' :
-    'activity-mode-evil';
-
-  container.innerHTML = todayActivities
-    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-    .map(a => `
-      <div class="activity-item ${modeClass}" data-id="${a.id}">
-        <div class="activity-info">
-          <div class="activity-name">${a.type}</div>
-          <div class="activity-meta">
-            <span class="activity-value">${a.value} ${a.unit}</span>
-            <span>${a.notes ? '📝 Notes' : ''}</span>
-          </div>
-        </div>
-        <div style="display:flex;gap:0.5rem;">
-          <button class="btn btn-sm btn-outline" onclick="openEditActivity('${a.id}')">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="btn btn-sm btn-danger" onclick="deleteActivity('${a.id}')">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      </div>
-    `)
-    .join('');
-}
-
-function renderRecentActivities() {
-  const container = document.getElementById('recentActivities');
-  if (!tracker.activities.length) {
-    container.innerHTML = `
-      <div class="empty-state" style="padding:1.5rem;">
-        <p style="font-size:0.9rem;">Your recent workouts will show up here.</p>
-      </div>`;
-    return;
-  }
-
-  const recent = [...tracker.activities]
-    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-    .slice(0, 6);
-
-  container.innerHTML = recent
-    .map(a => `
-      <div class="activity-item" data-id="${a.id}">
-        <div class="activity-info">
-          <div class="activity-name">Day ${a.day} • ${a.type}</div>
-          <div class="activity-meta">
-            <span>${a.value} ${a.unit}</span>
-            <span>${new Date(a.timestamp).toLocaleDateString()}</span>
-          </div>
-        </div>
-      </div>
-    `)
-    .join('');
-}
-
-// ============ STATS CALCULATION ============
-
+// Update stats
 function updateStats() {
+  const currentDay = getCurrentDay();
   const completedDays = new Set(tracker.activities.map(a => a.day));
-  const totalDaysCompleted = completedDays.size;
-  const completionRate = computeCompletionRate();
-
-  let minutes = 0;
-  tracker.activities.forEach(a => {
-    const u = a.unit.toLowerCase();
-    if (u === 'minutes') minutes += a.value;
-    else if (u === 'steps') minutes += a.value / 200;
-    else minutes += a.value / 10;
-  });
-
-  const bestStreak = computeBestStreak();
-  const currentStreak = computeCurrentStreak();
-
-  document.getElementById('totalDaysCompleted').textContent = totalDaysCompleted;
-  document.getElementById('totalMinutes').textContent = Math.round(minutes);
-  document.getElementById('bestStreak').textContent = bestStreak;
-  document.getElementById('streak').textContent = currentStreak;
-  document.getElementById('completionRate').textContent = `${completionRate}%`;
-
+  const totalDays = completedDays.size;
+  const completion = Math.round((totalDays / 90) * 100);
   const totalActivities = tracker.activities.length;
-  document.getElementById('totalWorkouts').textContent = totalActivities;
-  const avgDaily =
-    tracker.currentDay > 0 ? (totalActivities / tracker.currentDay).toFixed(1) : '0.0';
-  document.getElementById('avgDailyActivities').textContent = avgDaily;
-
-  document.getElementById('progressPercent').textContent = `${completionRate}%`;
-  document.getElementById('overallProgress').style.width = `${completionRate}%`;
-}
-
-function computeCompletionRate() {
-  const completedDays = new Set(tracker.activities.map(a => a.day));
-  const totalEffectiveDays = 90 - tracker.cheatDays.cheatDaysUsed.length;
-  const completionRate = totalEffectiveDays > 0 
-    ? Math.round((completedDays.size / totalEffectiveDays) * 100)
-    : 0;
+  const avgDaily = currentDay > 0 ? (totalActivities / currentDay).toFixed(1) : '0.0';
+  const cheatCount = Object.values(tracker.cheatDays).filter(Boolean).length;
   
-  return Math.min(completionRate, 100);
-}
-
-function computeCurrentStreak() {
-  const daysDone = new Set(tracker.activities.map(a => a.day));
+  // Calculate streak
   let streak = 0;
-  
-  for (let i = tracker.currentDay; i >= 1; i--) {
-    if (daysDone.has(i) || cheatDaySystem.isCheatDay(i)) {
+  for (let i = currentDay; i >= 1; i--) {
+    if (completedDays.has(i)) {
       streak++;
     } else {
       break;
     }
   }
-  return streak;
-}
-
-function computeBestStreak() {
-  const daysDone = new Set(tracker.activities.map(a => a.day));
-  let maxStreak = 0;
-  let current = 0;
   
+  // Calculate best streak
+  let bestStreak = 0;
+  let current = 0;
   for (let i = 1; i <= 90; i++) {
-    if (daysDone.has(i) || cheatDaySystem.isCheatDay(i)) {
+    if (completedDays.has(i)) {
       current++;
-      maxStreak = Math.max(maxStreak, current);
+      bestStreak = Math.max(bestStreak, current);
     } else {
       current = 0;
     }
   }
-  return maxStreak;
+  
+  document.getElementById('currentDay').textContent = currentDay;
+  document.getElementById('streak').textContent = streak;
+  document.getElementById('completion').textContent = `${completion}%`;
+  document.getElementById('totalActivities').textContent = totalActivities;
+  document.getElementById('daysCompleted').textContent = totalDays;
+  document.getElementById('cheatDays').textContent = cheatCount;
+  document.getElementById('bestStreak').textContent = bestStreak;
+  document.getElementById('avgDaily').textContent = avgDaily;
 }
 
-// ============ CHEAT DAY UI FUNCTIONS ============
-
-function openCheatDayModal() {
-  const modal = document.getElementById('cheatDayModal');
+// Build activity buttons
+function buildActivityButtons() {
+  const unique = [...new Set(tracker.activities.map(a => a.type))];
+  const container = document.getElementById('activitySelector');
+  container.innerHTML = '';
   
-  // Update cheat day limit selector
-  document.getElementById('cheatDayLimit').value = tracker.cheatDays.cheatDaysAllowed;
-  
-  // Update auto-schedule frequency
-  document.getElementById('autoScheduleFrequency').value = tracker.cheatDays.autoScheduleFrequency;
-  
-  // Update current day display
-  document.getElementById('currentDayDisplay').textContent = tracker.currentDay;
-  
-  // Update cheat day button state
-  const setBtn = document.getElementById('setCheatDayBtn');
-  const removeBtn = document.getElementById('removeCheatDayBtn');
-  
-  if (cheatDaySystem.isCheatDay(tracker.currentDay)) {
-    setBtn.style.display = 'none';
-    removeBtn.style.display = 'block';
-    setBtn.disabled = true;
-  } else {
-    setBtn.style.display = 'block';
-    removeBtn.style.display = 'none';
-    setBtn.disabled = !cheatDaySystem.canAddCheatDay(tracker.currentDay);
+  if (unique.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-muted);padding:10px;text-align:center;">No activities yet - add some to see charts!</p>';
+    return;
   }
   
-  // Render scheduled cheat days
-  renderScheduledCheatDays();
+  unique.forEach((activity, index) => {
+    const button = document.createElement('button');
+    button.className = `activity-btn ${index === 0 ? 'active' : ''}`;
+    button.textContent = activity;
+    button.onclick = () => selectActivity(activity, button);
+    container.appendChild(button);
+  });
   
-  modal.classList.add('active');
+  if (!selectedActivity && unique.length > 0) {
+    selectedActivity = unique[0];
+  }
 }
 
-function renderScheduledCheatDays() {
-  const container = document.getElementById('scheduledCheatDays');
-  const cheatDays = tracker.cheatDays.cheatDaysUsed.sort((a, b) => a - b);
+// Select activity
+function selectActivity(activity, button) {
+  document.querySelectorAll('.activity-btn').forEach(b => b.classList.remove('active'));
+  button.classList.add('active');
+  selectedActivity = activity;
+  renderChart();
+}
+
+// Switch chart view
+function switchChartView(view) {
+  currentChartView = view;
   
-  if (cheatDays.length === 0) {
+  // Update tab buttons
+  document.querySelectorAll('.chart-tab-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.querySelector(`.chart-tab-btn[data-chart="${view}"]`).classList.add('active');
+  
+  // Show/hide activity selector
+  const selector = document.getElementById('activitySelector');
+  if (view === 'activity') {
+    selector.style.display = 'none';
+  } else {
+    selector.style.display = 'flex';
+  }
+  
+  renderChart();
+}
+
+// Render chart
+function renderChart() {
+  const ctx = document.getElementById('activityChart').getContext('2d');
+  const currentDay = getCurrentDay();
+  
+  let labels = [];
+  let data = [];
+  let colors = [];
+  let chartType = 'bar';
+  
+  if (currentChartView === 'weekly') {
+    // Weekly Trends - Last 7 days
+    const startDay = Math.max(currentDay - 6, 1);
+    
+    for (let day = startDay; day <= currentDay; day++) {
+      labels.push(`D${day}`);
+      
+      if (selectedActivity) {
+        const dayActivities = tracker.activities.filter(a => 
+          a.day === day && a.type === selectedActivity
+        );
+        const sum = dayActivities.reduce((total, a) => total + a.value, 0);
+        data.push(sum);
+      } else {
+        const dayActivities = tracker.activities.filter(a => a.day === day);
+        data.push(dayActivities.length);
+      }
+      
+      if (tracker.cheatDays[day]) {
+        colors.push('#f97316');
+      } else if (day === currentDay) {
+        colors.push('#22c55e');
+      } else {
+        colors.push('#7c3aed');
+      }
+    }
+  } else if (currentChartView === 'monthly') {
+    // Monthly Overview - All days up to current
+    for (let day = 1; day <= currentDay; day++) {
+      labels.push(day);
+      
+      if (selectedActivity) {
+        const dayActivities = tracker.activities.filter(a => 
+          a.day === day && a.type === selectedActivity
+        );
+        const sum = dayActivities.reduce((total, a) => total + a.value, 0);
+        data.push(sum);
+      } else {
+        const dayActivities = tracker.activities.filter(a => a.day === day);
+        data.push(dayActivities.length);
+      }
+      
+      if (tracker.cheatDays[day]) {
+        colors.push('#f97316');
+      } else if (day === currentDay) {
+        colors.push('#22c55e');
+      } else {
+        colors.push('#7c3aed');
+      }
+    }
+  } else if (currentChartView === 'activity') {
+    // Activity Split - Pie chart
+    chartType = 'doughnut';
+    const activityMap = {};
+    
+    tracker.activities.forEach(a => {
+      activityMap[a.type] = (activityMap[a.type] || 0) + 1;
+    });
+    
+    labels = Object.keys(activityMap);
+    data = Object.values(activityMap);
+    colors = [
+      '#7c3aed', '#8b5cf6', '#a78bfa', '#c4b5fd', 
+      '#10b981', '#f59e0b', '#ef4444', '#3b82f6'
+    ];
+  }
+  
+  if (chart) chart.destroy();
+  
+  chart = new Chart(ctx, {
+    type: chartType,
+    data: {
+      labels,
+      datasets: [{
+        label: selectedActivity || 'Activities',
+        data,
+        backgroundColor: chartType === 'doughnut' ? colors : colors,
+        borderRadius: chartType === 'bar' ? 8 : 0,
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: chartType === 'bar' ? {
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: { 
+            font: { size: 11 },
+            stepSize: 1
+          }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { 
+            maxRotation: 45, 
+            font: { size: 10 }
+          }
+        }
+      } : {},
+      plugins: {
+        legend: { 
+          display: chartType === 'doughnut',
+          position: 'bottom'
+        },
+        tooltip: {
+          backgroundColor: 'rgba(30, 41, 59, 0.95)',
+          padding: 12,
+          cornerRadius: 8,
+          callbacks: {
+            afterLabel: function(context) {
+              if (currentChartView === 'weekly' || currentChartView === 'monthly') {
+                const dayIndex = currentChartView === 'weekly' ? 
+                  Math.max(getCurrentDay() - 6, 1) + context.dataIndex :
+                  context.dataIndex + 1;
+                
+                if (tracker.cheatDays[dayIndex]) {
+                  return '🍕 Cheat Day';
+                }
+              }
+              return '';
+            }
+          }
+        }
+      },
+      onClick: (event, elements) => {
+        if (elements.length > 0 && chartType === 'bar') {
+          const index = elements[0].index;
+          let dayIndex;
+          
+          if (currentChartView === 'weekly') {
+            dayIndex = Math.max(getCurrentDay() - 6, 1) + index;
+          } else {
+            dayIndex = index + 1;
+          }
+          
+          openDayModal(dayIndex);
+        }
+      }
+    }
+  });
+}
+
+// Render today's activities
+function renderTodayActivities() {
+  const container = document.getElementById('todayActivities');
+  const currentDay = getCurrentDay();
+  const todayActivities = tracker.activities.filter(a => a.day === currentDay);
+  
+  if (todayActivities.length === 0) {
     container.innerHTML = `
-      <div class="empty-state" style="padding: 1.5rem;">
-        <p style="font-size: 0.9rem;">No cheat days scheduled yet.</p>
+      <div class="empty-state">
+        <div class="empty-icon"><i class="fas fa-clipboard-list"></i></div>
+        <p>No activities logged today</p>
+        <p style="font-size:0.85rem;margin-top:0.5rem;">Add your first activity above!</p>
       </div>
     `;
     return;
   }
   
-  container.innerHTML = cheatDays.map(day => `
-    <div class="activity-item">
-      <div class="activity-info">
-        <div class="activity-name">Day ${day} - Cheat Day</div>
-        <div class="activity-meta">
-          <span style="color: var(--cheat);">🎯 Planned Rest Day</span>
-          ${day === tracker.currentDay ? '<span style="color: var(--primary);">(Today)</span>' : ''}
-          ${day < tracker.currentDay ? '<span style="color: var(--accent);">(Completed)</span>' : ''}
-        </div>
-      </div>
-      <button class="btn btn-sm btn-danger" onclick="removeCheatDay(${day})">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-  `).join('');
-}
-
-function updateCheatDaySettings() {
-  const newLimit = parseInt(document.getElementById('cheatDayLimit').value);
-  cheatDaySystem.updateSettings({ cheatDaysAllowed: newLimit });
-  updateCheatDayUI();
-  renderScheduledCheatDays();
-  showNotification('Settings Updated', `Cheat day limit set to ${newLimit}.`, 'success');
-}
-
-function setTodayAsCheatDay() {
-  const success = cheatDaySystem.setCheatDay(tracker.currentDay);
-  if (success) {
-    updateCheatDayUI();
-    renderScheduledCheatDays();
-    updateAll();
-    showNotification(
-      'Cheat Day Set!',
-      'Today is now a cheat day. Enjoy your rest! Your streak is protected.',
-      'success'
-    );
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#f97316', '#fdba74', '#fb923c']
-    });
-    
-    // Update modal buttons
-    document.getElementById('setCheatDayBtn').style.display = 'none';
-    document.getElementById('removeCheatDayBtn').style.display = 'block';
-  }
-}
-
-function removeCheatDay(day) {
-  const success = cheatDaySystem.removeCheatDay(day);
-  if (success) {
-    updateCheatDayUI();
-    renderScheduledCheatDays();
-    updateAll();
-    showNotification('Cheat Day Removed', `Day ${day} is no longer a cheat day.`, 'info');
-    
-    // Update modal buttons if removing today
-    if (day === tracker.currentDay) {
-      document.getElementById('setCheatDayBtn').style.display = 'block';
-      document.getElementById('removeCheatDayBtn').style.display = 'none';
-    }
-  }
-}
-
-function autoScheduleCheatDays() {
-  const frequency = parseInt(document.getElementById('autoScheduleFrequency').value);
+  const isCheatDay = tracker.cheatDays[currentDay];
   
-  if (frequency === 0) {
-    showNotification('Auto-Schedule Disabled', 'Set a frequency to auto-schedule cheat days.', 'info');
-    return;
-  }
-  
-  cheatDaySystem.updateSettings({ autoScheduleFrequency: frequency });
-  const scheduledDays = cheatDaySystem.autoScheduleCheatDays(frequency);
-  
-  if (scheduledDays.length > 0) {
-    updateCheatDayUI();
-    renderScheduledCheatDays();
-    showNotification(
-      'Cheat Days Scheduled',
-      `Auto-scheduled ${scheduledDays.length} cheat days every ${frequency} days.`,
-      'success'
-    );
-  } else {
-    showNotification('No Changes', 'Cheat days are already scheduled according to this frequency.', 'info');
-  }
-}
-
-function updateCheatDayUI() {
-  const stats = cheatDaySystem.getStats();
-  
-  // Update header stat
-  document.getElementById('cheatDaysUsed').textContent = stats.used;
-  
-  // Update cheat day widget
-  const cheatWidget = document.getElementById('cheatDayWidget');
-  if (cheatDaySystem.isCheatDay(tracker.currentDay)) {
-    cheatWidget.style.display = 'block';
-    document.getElementById('cheatDaysTotal').textContent = stats.allowed;
-    document.getElementById('cheatDaysRemaining').textContent = stats.remaining;
-    document.getElementById('nextCheatDay').textContent = stats.nextSuggestion || 'N/A';
-  } else {
-    cheatWidget.style.display = 'none';
-  }
-  
-  // Update cheat day stats in sidebar
-  document.getElementById('cheatDaysUsedStats').textContent = stats.used;
-  document.getElementById('cheatDaysRemainingStats').textContent = stats.remaining;
-  document.getElementById('cheatDayFrequency').textContent = stats.frequency || 'Manual';
-  
-  // Update verdict if it's a cheat day
-  if (cheatDaySystem.isCheatDay(tracker.currentDay)) {
-    const badge = document.getElementById('verdictBadge');
-    const textEl = document.getElementById('verdictText');
-    
-    badge.className = 'verdict-badge verdict-cheat';
-    badge.textContent = 'CHEAT DAY 🎯';
-    textEl.textContent = 'Planned rest day. Enjoy your recovery! Your streak is protected.';
-  }
-}
-
-// ============ DAILY VERDICT ============
-
-function getDayStatus(day) {
-  // Check if it's a cheat day first
-  if (cheatDaySystem.isCheatDay(day)) {
-    return 'cheat';
-  }
-  
-  // Then check for activities
-  const dayActs = tracker.activities.filter(a => a.day === day);
-  if (dayActs.length > 0) {
-    return 'completed';
-  }
-  
-  // Check if day is in the past with no activities
-  if (day < tracker.currentDay) {
-    return 'missed';
-  }
-  
-  // Check if it's today
-  if (day === tracker.currentDay) {
-    return 'today';
-  }
-  
-  // Future day
-  return 'pending';
-}
-
-const MODES = {
-  POOR: 0,
-  GOOD: 1,
-  BEAST: 2,
-  EVIL: 3,
-  CHEAT: 4
-};
-
-const MODE_META = {
-  POOR: { label: 'POOR 💤', color: '#6b7280' },
-  GOOD: { label: 'GOOD 🙂', color: '#22c55e' },
-  BEAST: { label: 'BEAST 😈', color: '#ef4444' },
-  EVIL: { label: 'EVIL 🔥', color: '#a855f7' },
-  CHEAT: { label: 'CHEAT 🎯', color: '#f97316' }
-};
-
-const VERDICT_COPY = {
-  POOR:  "You showed up, but you didn't push. Tomorrow is mandatory.",
-  GOOD:  "You did what most people won't. Now repeat it.",
-  BEAST: "Pressure applied. Adaptation in progress.",
-  EVIL:  "Elite output detected. This level is rare.",
-  CHEAT: "Planned rest day. Recovery is progress too."
-};
-
-function computeDayMetrics(day) {
-  const dayActs = tracker.activities.filter(a => a.day === day);
-
-  let steps = 0;
-  let pushups = 0;
-  let minutes = 0;
-
-  dayActs.forEach(a => {
-    const unit = a.unit.toLowerCase();
-    const type = a.type.toLowerCase();
-
-    if (unit === 'steps') steps += a.value;
-    if (type.includes('push-up') || type.includes('pushup')) pushups += a.value;
-    if (unit === 'minutes') minutes += a.value;
-  });
-
-  return { steps, pushups, minutes };
-}
-
-function modeFromSteps(steps) {
-  if (steps >= 20000) return 'EVIL';
-  if (steps >= 15000) return 'BEAST';
-  if (steps >= 10000) return 'GOOD';
-  return 'POOR';
-}
-
-function modeFromPushups(pushups) {
-  if (pushups >= 200) return 'EVIL';
-  if (pushups >= 100) return 'BEAST';
-  if (pushups >= 50) return 'GOOD';
-  return 'POOR';
-}
-
-function modeFromMinutes(mins) {
-  if (mins >= 75) return 'EVIL';
-  if (mins >= 45) return 'BEAST';
-  if (mins >= 20) return 'GOOD';
-  return 'POOR';
-}
-
-function higherMode(m1, m2) {
-  if (!m1) return m2;
-  if (!m2) return m1;
-  return MODES[m2] > MODES[m1] ? m2 : m1;
-}
-
-function computeDailyMode(day) {
-  // Check if it's a cheat day first
-  if (cheatDaySystem.isCheatDay(day)) {
-    return 'CHEAT';
-  }
-  
-  const { steps, pushups, minutes } = computeDayMetrics(day);
-
-  let dayMode = null;
-  if (steps > 0) dayMode = higherMode(dayMode, modeFromSteps(steps));
-  if (pushups > 0) dayMode = higherMode(dayMode, modeFromPushups(pushups));
-  if (minutes > 0) dayMode = higherMode(dayMode, modeFromMinutes(minutes));
-
-  return dayMode || 'POOR';
-}
-
-function updateDailyVerdict() {
-  const mode = computeDailyMode(tracker.currentDay);
-  const badge = document.getElementById('verdictBadge');
-  const textEl = document.getElementById('verdictText');
-
-  badge.className = 'verdict-badge';
-  if (mode === 'POOR') badge.classList.add('verdict-poor');
-  if (mode === 'GOOD') badge.classList.add('verdict-good');
-  if (mode === 'BEAST') badge.classList.add('verdict-beast');
-  if (mode === 'EVIL') badge.classList.add('verdict-evil');
-  if (mode === 'CHEAT') badge.classList.add('verdict-cheat');
-
-  badge.textContent = MODE_META[mode].label;
-  textEl.textContent = VERDICT_COPY[mode];
-}
-
-// ============ ACHIEVEMENTS ============
-
-function updateAchievements() {
-  const list = document.getElementById('achievementsList');
-  const completedDays = new Set(tracker.activities.map(a => a.day));
-  const totalDays = completedDays.size;
-  const totalActivities = tracker.activities.length;
-  const bestStreak = computeBestStreak();
-
-  const achievements = [
-    {
-      id: 'day1',
-      name: 'First Step',
-      desc: 'Complete your first day of activity.',
-      icon: '🥇',
-      unlocked: totalDays >= 1
-    },
-    {
-      id: 'day7',
-      name: 'One Week Strong',
-      desc: 'Complete 7 days of activity.',
-      icon: '🔥',
-      unlocked: totalDays >= 7
-    },
-    {
-      id: 'streak3',
-      name: 'Consistency Starter',
-      desc: 'Hit a 3-day streak.',
-      icon: '📅',
-      unlocked: bestStreak >= 3
-    },
-    {
-      id: 'streak7',
-      name: 'Streak Machine',
-      desc: 'Hit a 7-day streak.',
-      icon: '⚡',
-      unlocked: bestStreak >= 7
-    },
-    {
-      id: 'workouts25',
-      name: '25 Workouts',
-      desc: 'Log 25 total activities.',
-      icon: '🏆',
-      unlocked: totalActivities >= 25
-    },
-    {
-      id: 'workouts50',
-      name: '50 Workouts',
-      desc: 'Log 50 total activities.',
-      icon: '💪',
-      unlocked: totalActivities >= 50
-    }
-  ];
-
-  const unlockedCount = achievements.filter(a => a.unlocked).length;
-  document.getElementById('achievementsCount').textContent = `${unlockedCount}/${achievements.length}`;
-
-  list.innerHTML = achievements
+  container.innerHTML = todayActivities
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
     .map(a => `
-      <div class="achievement-badge ${a.unlocked ? '' : 'locked'}">
-        <div class="achievement-icon">${a.icon}</div>
-        <div class="achievement-name">${a.name}</div>
-        <div class="achievement-desc">${a.desc}</div>
+      <div class="activity-item ${isCheatDay ? 'cheat-day' : ''}">
+        <div class="activity-info">
+          <div class="activity-name">${a.type}</div>
+          <div class="activity-meta">
+            <span class="activity-value">${a.value} ${a.unit}</span>
+            <span>${new Date(a.timestamp).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})}</span>
+          </div>
+        </div>
+        <button class="btn btn-outline" style="padding:0.5rem 0.75rem;" onclick="deleteActivity('${a.id}')">
+          <i class="fas fa-trash"></i>
+        </button>
       </div>
     `)
     .join('');
 }
 
-// ============ CHALLENGES ============
-
-function updateChallengesUI() {
-  const container = document.getElementById('activeChallenges');
-  const activeIds = Object.keys(tracker.challenges || {});
-  if (!activeIds.length) {
+// Render all activities
+function renderAllActivities() {
+  const container = document.getElementById('allActivities');
+  
+  if (tracker.activities.length === 0) {
     container.innerHTML = `
-      <div class="empty-state" style="padding:1.5rem;">
-        <p style="font-size:0.9rem;">Join a challenge to add an extra layer of motivation.</p>
-      </div>`;
+      <div class="empty-state">
+        <div class="empty-icon"><i class="fas fa-clipboard-list"></i></div>
+        <p>No activities logged yet</p>
+        <p style="font-size:0.85rem;margin-top:0.5rem;">Start your fitness journey today!</p>
+      </div>
+    `;
     return;
   }
-
-  container.innerHTML = activeIds
-    .map(id => {
-      const ch = tracker.challenges[id];
-      const pct = Math.round((ch.progress / ch.target) * 100);
-      return `
-        <div class="challenge-card">
-          <div class="challenge-info">
-            <div class="challenge-name">
-              <i class="fas fa-flag-checkered"></i> ${ch.label}
-            </div>
-            <div class="challenge-sub">${ch.progress}/${ch.target} days • ${pct}%</div>
-            <div class="challenge-progress">
-              <div class="challenge-progress-fill" style="width:${pct}%;"></div>
-            </div>
+  
+  const sorted = [...tracker.activities].sort((a, b) => b.day - a.day || new Date(b.timestamp) - new Date(a.timestamp));
+  
+  container.innerHTML = sorted.map(a => {
+    const isCheatDay = tracker.cheatDays[a.day];
+    return `
+      <div class="activity-item ${isCheatDay ? 'cheat-day' : ''}">
+        <div class="activity-info">
+          <div class="activity-name">Day ${a.day} • ${a.type}</div>
+          <div class="activity-meta">
+            <span class="activity-value">${a.value} ${a.unit}</span>
+            <span>${new Date(a.timestamp).toLocaleDateString()}</span>
           </div>
         </div>
-      `;
-    })
-    .join('');
+        <button class="btn btn-outline" style="padding:0.5rem 0.75rem;" onclick="deleteActivity('${a.id}')">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    `;
+  }).join('');
 }
 
-function joinChallenge(id) {
-  if (!tracker.challenges) tracker.challenges = {};
-  if (tracker.challenges[id]) {
-    showNotification('Already Joined', 'This challenge is already active.', 'info');
-    closeModal('joinChallengeModal');
-    return;
-  }
-
-  const config = {
-    pushup30: { label: '30-Day Push-up', target: 30, progress: 0 },
-    walking60: { label: '60-Day Walking', target: 60, progress: 0 },
-    plank90: { label: '90-Day Plank', target: 90, progress: 0 }
-  }[id];
-
-  if (!config) return;
-
-  tracker.challenges[id] = { ...config };
-  saveState();
-  updateChallengesUI();
-  closeModal('joinChallengeModal');
-  showNotification('Challenge Joined', `${config.label} challenge added to your dashboard.`, 'success');
-}
-
-function createCustomChallenge() {
-  showNotification('Coming Soon', 'Custom challenge creation will be available in a future update.', 'info');
-}
-
-// ============ CHART ============
-
-function buildChartData(mode) {
-  const labels = [];
-  const data = [];
-
-  if (mode === 'weekly') {
-    const weekStart = Math.max(tracker.currentDay - 6, 1);
-    for (let d = weekStart; d <= tracker.currentDay; d++) {
-      labels.push(`D${d}`);
-      data.push(tracker.activities.filter(a => a.day === d).length);
-    }
-  } else if (mode === 'monthly') {
-    for (let d = 1; d <= tracker.currentDay; d++) {
-      labels.push(d);
-      data.push(tracker.activities.filter(a => a.day === d).length);
-    }
-  } else if (mode === 'activity') {
-    const map = {};
-    tracker.activities.forEach(a => {
-      map[a.type] = (map[a.type] || 0) + 1;
-    });
-    for (const k in map) {
-      labels.push(k);
-      data.push(map[k]);
-    }
-  }
-
-  return { labels, data };
-}
-
-function updateChart(mode = 'weekly') {
-  const ctx = document.getElementById('progressChart').getContext('2d');
-  const { labels, data } = buildChartData(mode);
-
-  if (chartInstance) chartInstance.destroy();
-
-  chartInstance = new Chart(ctx, {
-    type: mode === 'activity' ? 'doughnut' : 'bar',
-    data: {
-      labels,
-      datasets: [
-        {
-          label: 'Workouts',
-          data,
-          backgroundColor:
-            mode === 'activity'
-              ? ['#7c3aed', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe', '#ede9fe']
-              : 'rgba(124, 58, 237, 0.7)',
-          borderRadius: mode === 'activity' ? 0 : 8
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: mode === 'activity' },
-        tooltip: { enabled: true }
-      },
-      scales: mode === 'activity'
-        ? {}
-        : {
-            x: {
-              ticks: { color: '#64748b', font: { size: 11 } },
-              grid: { display: false }
-            },
-            y: {
-              ticks: { color: '#64748b', stepSize: 1 },
-              grid: { color: 'rgba(226, 232, 240, 0.8)' }
-            }
-          }
-    }
-  });
-}
-
-function switchTab(tabName) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
-  updateChart(tabName);
-}
-
-// ============ CALENDAR MORPH ============
-
-function initCalendarMorph() {
-  const dayData = generateDayData();
-  const calendarCells = document.getElementById('calendarCells');
-  const timelineItems = document.getElementById('timelineItems');
+// Render calendar
+function renderCalendar() {
+  const container = document.getElementById('calendarGrid');
+  const currentDay = getCurrentDay();
+  const completedDays = new Set(tracker.activities.map(a => a.day));
   
-  calendarCells.innerHTML = '';
-  timelineItems.innerHTML = '';
+  // Keep the header
+  const header = container.querySelector('.calendar-header');
+  container.innerHTML = '';
+  container.appendChild(header);
   
-  dayData.forEach(day => {
+  for (let day = 1; day <= 90; day++) {
     const cell = document.createElement('div');
-    cell.className = `day-cell ${day.status}`;
-    cell.setAttribute('data-day', day.day);
+    cell.className = 'day-cell';
     
-    if (day.status === 'today') {
+    const hasActivity = completedDays.has(day);
+    const isCheatDay = tracker.cheatDays[day];
+    const isToday = day === currentDay;
+    const isFuture = day > currentDay;
+    
+    if (isToday) {
       cell.classList.add('today');
+    } else if (isCheatDay) {
+      cell.classList.add('cheat-day');
+    } else if (hasActivity) {
+      cell.classList.add('completed');
+    } else if (!isFuture) {
+      cell.classList.add('missed');
     }
     
     cell.innerHTML = `
-      <div class="day-number">${day.day}</div>
-      <div class="day-status">${day.status.toUpperCase()}</div>
-      ${day.activities.length > 0 ? 
-        `<div style="font-size:0.6rem;margin-top:0.2rem;">${day.activities.length} 💪</div>` : 
-        ''}
+      <div class="day-number">${day}</div>
+      <div class="day-status">${
+        isToday ? 'TODAY' :
+        isCheatDay ? 'CHEAT' :
+        hasActivity ? 'DONE' :
+        isFuture ? 'PENDING' : 'MISSED'
+      }</div>
     `;
     
-    calendarCells.appendChild(cell);
-    
-    const timelineItem = document.createElement('div');
-    timelineItem.className = `timeline-item ${day.status}`;
-    timelineItem.setAttribute('data-day', day.day);
-    
-    const dateStr = day.date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      month: 'short',
-      day: 'numeric'
-    });
-    
-    timelineItem.innerHTML = `
-      <div class="timeline-day">
-        <span>Day ${day.day}</span>
-        <span style="font-size:0.8rem;opacity:0.8;">${day.weekday}</span>
-      </div>
-      <div class="timeline-content">
-        <div class="timeline-date">${dateStr}</div>
-        <div class="timeline-activity">
-          ${day.activities.length > 0 ? 
-            day.activities.map(act => `<div>${act}</div>`).join('') : 
-            'No activities recorded'}
-        </div>
-        <div class="timeline-meta">
-          <span class="timeline-status">${day.status.toUpperCase()}</span>
-          <span>${day.activities.length} activities</span>
-        </div>
-      </div>
-    `;
-    
-    timelineItems.appendChild(timelineItem);
-  });
-  
-  // Add click event to day cells
-  document.querySelectorAll('.day-cell').forEach(cell => {
-    cell.addEventListener('click', () => {
-      const day = cell.getAttribute('data-day');
-      const dayDataItem = dayData.find(d => d.day == day);
-      
-      if (dayDataItem) {
-        alert(`Day ${day}: ${dayDataItem.status.toUpperCase()}\n\n` +
-              `Activities: ${dayDataItem.activities.length > 0 ? 
-                dayDataItem.activities.join('\n') : 'None'}`);
-      }
-    });
-  });
+    cell.onclick = () => showDayDetails(day);
+    container.appendChild(cell);
+  }
 }
 
-function generateDayData() {
-  const today = new Date();
-  const days = [];
+// Show day details
+function showDayDetails(day) {
+  openDayModal(day);
+}
+
+// Open day modal
+function openDayModal(day) {
+  const modal = document.getElementById('dayModal');
+  const dayActivities = tracker.activities.filter(a => a.day === day);
+  const isCheatDay = tracker.cheatDays[day];
+  const currentDay = getCurrentDay();
   
-  for (let i = 1; i <= 90; i++) {
-    const date = new Date(today);
-    date.setDate(today.getDate() - 45 + i);
-    
-    const status = getDayStatus(i);
-    let activities = [];
-    
-    if (tracker) {
-      const dayActs = tracker.activities.filter(a => a.day === i);
-      activities = dayActs.map(a => `${a.type} - ${a.value} ${a.unit}`);
+  // Calculate date
+  const startDate = new Date(tracker.startDate);
+  const dayDate = new Date(startDate);
+  dayDate.setDate(startDate.getDate() + day - 1);
+  
+  const dateOptions = { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' };
+  const dateString = dayDate.toLocaleDateString(undefined, dateOptions);
+  
+  // Set day badge
+  document.querySelector('.day-circle').textContent = day;
+  
+  // Set title
+  document.getElementById('modalTitle').textContent = `Day ${day} Details`;
+  document.getElementById('modalSubtitle').textContent = dateString;
+  
+  // Set status badge
+  const statusBadge = document.getElementById('modalStatus');
+  statusBadge.className = 'modal-status-badge';
+  
+  if (day === currentDay) {
+    statusBadge.textContent = 'TODAY';
+    statusBadge.classList.add('today');
+  } else if (isCheatDay) {
+    statusBadge.textContent = 'CHEAT DAY';
+    statusBadge.classList.add('cheat');
+  } else if (dayActivities.length > 0) {
+    statusBadge.textContent = 'COMPLETED';
+  } else if (day < currentDay) {
+    statusBadge.textContent = 'MISSED';
+    statusBadge.classList.add('missed');
+  } else {
+    statusBadge.textContent = 'PENDING';
+  }
+  
+  // Set stats
+  document.getElementById('modalActivityCount').textContent = dayActivities.length;
+  
+  let totalMinutes = 0;
+  dayActivities.forEach(a => {
+    if (a.unit === 'minutes') totalMinutes += a.value;
+    else if (a.unit === 'seconds') totalMinutes += Math.round(a.value / 60);
+  });
+  document.getElementById('modalTotalTime').textContent = totalMinutes;
+  
+  // Calculate streak up to this day
+  const completedDays = new Set(tracker.activities.map(a => a.day));
+  let streak = 0;
+  for (let i = day; i >= 1; i--) {
+    if (completedDays.has(i)) {
+      streak++;
+    } else {
+      break;
     }
-    
-    days.push({
-      day: i,
-      date: date,
-      status: status,
-      activities: activities,
-      weekday: date.toLocaleDateString('en-US', { weekday: 'short' })
-    });
   }
+  document.getElementById('modalStreak').textContent = streak;
   
-  return days;
-}
-
-// Calendar morph functionality
-document.getElementById('gridView').addEventListener('click', () => {
-  resetToGrid();
-});
-
-document.getElementById('timelineView').addEventListener('click', () => {
-  morphToTimeline();
-});
-
-let isMorphing = false;
-
-function morphToTimeline() {
-  if (isMorphing) return;
+  // Set activities list
+  const activitiesList = document.getElementById('modalActivitiesList');
   
-  const calendarGrid = document.getElementById('calendarGrid');
-  const timeline = document.getElementById('timeline');
-  
-  isMorphing = true;
-  
-  calendarGrid.classList.add('morphing');
-  timeline.classList.add('active');
-  
-  document.getElementById('gridView').classList.remove('active');
-  document.getElementById('timelineView').classList.add('active');
-  
-  setTimeout(() => {
-    isMorphing = false;
-  }, 500);
-}
-
-function resetToGrid() {
-  if (isMorphing) return;
-  
-  const calendarGrid = document.getElementById('calendarGrid');
-  const timeline = document.getElementById('timeline');
-  
-  isMorphing = true;
-  
-  calendarGrid.classList.remove('morphing');
-  timeline.classList.remove('active');
-  
-  document.getElementById('gridView').classList.add('active');
-  document.getElementById('timelineView').classList.remove('active');
-  
-  setTimeout(() => {
-    isMorphing = false;
-  }, 500);
-}
-
-// ============ MODAL FUNCTIONS ============
-
-function openAddActivityModal() {
-  document.getElementById('activityForm').reset();
-  document.getElementById('activityDay').value = tracker.currentDay;
-  document.getElementById('customActivityGroup').style.display = 'none';
-  document.getElementById('customUnitGroup').style.display = 'none';
-  document.getElementById('addActivityModal').classList.add('active');
-}
-
-function openEditActivity(id) {
-  const activity = tracker.activities.find(a => a.id === id);
-  if (!activity) return;
-
-  document.getElementById('editActivityId').value = id;
-
-  const isCustomType = ![
-    'Walking',
-    'Running',
-    'Push-ups',
-    'Squats',
-    'Plank',
-    'Yoga',
-    'Cycling',
-    'Swimming',
-    'Weight Training'
-  ].includes(activity.type);
-
-  document.getElementById('editActivityType').value = isCustomType ? 'custom' : activity.type;
-  document.getElementById('editCustomActivityGroup').style.display = isCustomType ? 'block' : 'none';
-  document.getElementById('editCustomActivityName').value = isCustomType ? activity.type : '';
-
-  const isCustomUnit = !['minutes', 'reps', 'steps', 'km', 'sets'].includes(activity.unit);
-  document.getElementById('editActivityUnit').value = isCustomUnit ? 'custom' : activity.unit;
-  document.getElementById('editCustomUnitGroup').style.display = isCustomUnit ? 'block' : 'none';
-  document.getElementById('editCustomUnitName').value = isCustomUnit ? activity.unit : '';
-
-  document.getElementById('editActivityValue').value = activity.value;
-  document.getElementById('editActivityNotes').value = activity.notes || '';
-
-  document.getElementById('editActivityModal').classList.add('active');
-}
-
-function openJoinChallengeModal() {
-  document.getElementById('joinChallengeModal').classList.add('active');
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.remove('active');
-}
-
-// ============ ACTIVITY FORM FUNCTIONS ============
-
-function saveActivity(event) {
-  event.preventDefault();
-
-  const type = document.getElementById('activityType').value;
-  const value = parseInt(document.getElementById('activityValue').value, 10);
-  const unit = document.getElementById('activityUnit').value;
-  const notes = document.getElementById('activityNotes').value.trim();
-  const day = parseInt(document.getElementById('activityDay').value, 10);
-
-  if (!type || !value || !unit || !day) {
-    showNotification('Missing Data', 'Please fill all required fields.', 'warning');
-    return;
-  }
-
-  const finalType =
-    type === 'custom'
-      ? (document.getElementById('customActivityName').value.trim() || 'Custom Activity')
-      : type;
-
-  const finalUnit =
-    unit === 'custom'
-      ? (document.getElementById('customUnitName').value.trim() || 'units')
-      : unit;
-
-  const activity = {
-    id: Date.now().toString(),
-    type: finalType,
-    value,
-    unit: finalUnit,
-    notes,
-    day,
-    timestamp: new Date().toISOString()
-  };
-
-  tracker.activities.push(activity);
-  saveState();
-  updateAll();
-
-  closeModal('addActivityModal');
-  showNotification('Activity Added', `${finalType} added to Day ${day}.`, 'success');
-}
-
-function updateActivity(event) {
-  event.preventDefault();
-  const id = document.getElementById('editActivityId').value;
-  const activity = tracker.activities.find(a => a.id === id);
-  if (!activity) return;
-
-  const type = document.getElementById('editActivityType').value;
-  const value = parseInt(document.getElementById('editActivityValue').value, 10);
-  const unit = document.getElementById('editActivityUnit').value;
-  const notes = document.getElementById('editActivityNotes').value.trim();
-
-  if (!type || !value || !unit) {
-    showNotification('Missing Data', 'Please fill all required fields.', 'warning');
-    return;
-  }
-
-  const finalType =
-    type === 'custom'
-      ? (document.getElementById('editCustomActivityName').value.trim() || 'Custom Activity')
-      : type;
-
-  const finalUnit =
-    unit === 'custom'
-      ? (document.getElementById('editCustomUnitName').value.trim() || 'units')
-      : unit;
-
-  activity.type = finalType;
-  activity.value = value;
-  activity.unit = finalUnit;
-  activity.notes = notes;
-
-  saveState();
-  updateAll();
-  closeModal('editActivityModal');
-
-  showNotification('Activity Updated', 'Your activity has been updated.', 'success');
-}
-
-function deleteActivity(id) {
-  const activity = tracker.activities.find(a => a.id === id);
-  if (!activity) return;
-
-  if (!confirm('Delete this activity?')) return;
-
-  tracker.activities = tracker.activities.filter(a => a.id !== id);
-  saveState();
-  updateAll();
-  showNotification('Deleted', 'Activity removed.', 'success');
-}
-
-function deleteActivityFromEdit() {
-  const id = document.getElementById('editActivityId').value;
-  deleteActivity(id);
-  closeModal('editActivityModal');
-}
-
-// ============ QUICK ACTIONS ============
-
-function jumpToDay(dayNum) {
-  tracker.currentDay = parseInt(dayNum, 10);
-  saveState();
-  updateAll();
-  showNotification('Day Changed', `Jumped to Day ${dayNum}.`, 'info');
-}
-
-function logDayCompletion() {
-  if (!tracker.days[tracker.currentDay]) {
-    tracker.days[tracker.currentDay] = { status: 'completed' };
+  if (dayActivities.length === 0) {
+    activitiesList.innerHTML = `
+      <div class="modal-empty">
+        <i class="fas fa-inbox"></i>
+        <p>No activities logged for this day</p>
+      </div>
+    `;
   } else {
-    tracker.days[tracker.currentDay].status = 'completed';
+    activitiesList.innerHTML = dayActivities
+      .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
+      .map(a => {
+        const time = new Date(a.timestamp).toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        return `
+          <div class="modal-activity-item ${isCheatDay ? 'cheat' : ''}">
+            <div class="modal-activity-left">
+              <div class="modal-activity-type">${a.type}</div>
+              <div class="modal-activity-time">${time}</div>
+            </div>
+            <div class="modal-activity-value">${a.value} ${a.unit}</div>
+          </div>
+        `;
+      })
+      .join('');
   }
-
-  saveState();
-  updateAll();
-
-  showNotification('Day Completed', `Day ${tracker.currentDay} marked complete.`, 'success');
-  confetti({
-    particleCount: 120,
-    spread: 70,
-    origin: { y: 0.6 }
-  });
-}
-
-function setReminder() {
-  showNotification('Reminder Set', 'Set a reminder in your phone at 8:00 PM to update Fit90.', 'info');
-}
-
-function exportData() {
-  const data = tracker;
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `fit90-export-${new Date().toISOString().split('T')[0]}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-  showNotification('Exported', 'Your data has been downloaded as JSON.', 'success');
-}
-
-function shareProgress() {
-  const totalActivities = tracker.activities.length;
-  const text =
-    `I've completed ${totalActivities} workouts in my 90-day fitness challenge!\n` +
-    `Current day: ${tracker.currentDay}\n#Fit90`;
-
-  if (navigator.share) {
-    navigator.share({
-      title: 'My Fit90 Progress',
-      text,
-      url: location.href
-    });
-  } else {
-    navigator.clipboard.writeText(text).then(() => {
-      showNotification('Copied', 'Progress text copied. Share it anywhere.', 'success');
-    });
+  
+  modal.classList.add('active');
+  
+  // Add confetti if it's a milestone
+  if (dayActivities.length >= 5) {
+    setTimeout(() => {
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.6 }
+      });
+    }, 300);
   }
 }
 
-function resetChallenge() {
-  if (!confirm('Reset all Fit90 data? This cannot be undone.')) return;
-  localStorage.removeItem(STORAGE_KEY);
-  location.reload();
+// Close day modal
+function closeDayModal() {
+  document.getElementById('dayModal').classList.remove('active');
 }
 
-// ============ NOTIFICATION SYSTEM ============
-
+// Show notification
 let notificationTimeout = null;
 
-function showNotification(title, message, type = 'info') {
-  const n = document.getElementById('notification');
-  const iconEl = n.querySelector('.notification-icon');
-  const titleEl = n.querySelector('.notification-title');
-  const msgEl = n.querySelector('.notification-message');
-
-  let icon = 'ℹ️';
-  if (type === 'success') icon = '✅';
-  if (type === 'error') icon = '❌';
-  if (type === 'warning') icon = '⚠️';
-
+function showNotification(icon, title, message) {
+  const notification = document.getElementById('notification');
+  const iconEl = notification.querySelector('.notification-icon');
+  const titleEl = notification.querySelector('.notification-title');
+  const messageEl = notification.querySelector('.notification-message');
+  
   iconEl.textContent = icon;
   titleEl.textContent = title;
-  msgEl.textContent = message;
-
-  n.className = 'notification';
-  n.classList.add('notification-' + type, 'show');
-
+  messageEl.textContent = message;
+  
+  notification.classList.add('show');
+  
   if (notificationTimeout) clearTimeout(notificationTimeout);
   notificationTimeout = setTimeout(() => {
-    n.classList.remove('show');
-  }, 4000);
+    notification.classList.remove('show');
+  }, 3500);
 }
 
-function hideNotification() {
-  document.getElementById('notification').classList.remove('show');
-}
-
-// ============ SCROLL PROGRESS ============
-
-function updateScrollProgress() {
-  const scrollY = window.scrollY;
-  const windowHeight = window.innerHeight;
-  const documentHeight = document.documentElement.scrollHeight;
-  const maxScroll = documentHeight - windowHeight;
-  
-  const scrollProgress = scrollY / maxScroll;
-  
-  const progressFill = document.getElementById('progressFill');
-  if (progressFill) {
-    progressFill.style.height = `${scrollProgress * 100}%`;
-  }
-}
-
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-  if (!scrollTimeout) {
-    scrollTimeout = setTimeout(() => {
-      updateScrollProgress();
-      scrollTimeout = null;
-    }, 16);
-  }
+// Tab switching
+document.querySelectorAll('.tab-btn, .mobile-nav button').forEach(button => {
+  button.addEventListener('click', function() {
+    const tabId = this.dataset.tab;
+    
+    // Update buttons
+    document.querySelectorAll('.tab-btn, .mobile-nav button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    this.classList.add('active');
+    
+    // Find corresponding button in other nav
+    const otherBtn = document.querySelector(
+      this.classList.contains('tab-btn') ? 
+      `.mobile-nav button[data-tab="${tabId}"]` :
+      `.tab-btn[data-tab="${tabId}"]`
+    );
+    if (otherBtn) otherBtn.classList.add('active');
+    
+    // Show tab content
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.remove('active');
+    });
+    document.getElementById(tabId).classList.add('active');
+  });
 });
 
 // Initialize
-updateScrollProgress();
-
-// ============ MOBILE HEADER SCROLL ============
-
-let lastScrollTop = 0;
-const header = document.getElementById('mainHeader');
-
-function updateHeaderScroll() {
-  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-  
-  if (window.innerWidth <= 768) {
-    if (currentScroll <= header.offsetHeight) {
-      header.classList.remove('scrolling-down', 'scrolling-up');
-    } else if (currentScroll > lastScrollTop && currentScroll > header.offsetHeight) {
-      header.classList.remove('scrolling-up');
-      header.classList.add('scrolling-down');
-    } else {
-      header.classList.remove('scrolling-down');
-      header.classList.add('scrolling-up');
-    }
-  } else {
-    header.classList.remove('scrolling-down', 'scrolling-up');
-  }
-  
-  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-}
-
-window.addEventListener('scroll', updateHeaderScroll, { passive: true });
-window.addEventListener('resize', updateHeaderScroll, { passive: true });
-
-// Initialize header state
 document.addEventListener('DOMContentLoaded', () => {
-  updateHeaderScroll();
+  loadData();
+  updateAll();
+  
+  // Initialize chart view
+  switchChartView('weekly');
+  
+  setTimeout(() => {
+    showNotification('👋', 'Welcome to Fit90!', 'Start logging your activities to track your 90-day journey');
+  }, 500);
 });
 
-// ============ GLOBAL FUNCTION EXPORTS ============
-
-window.openAddActivityModal = openAddActivityModal;
-window.openEditActivity = openEditActivity;
-window.closeModal = closeModal;
-window.saveActivity = saveActivity;
-window.updateActivity = updateActivity;
-window.deleteActivity = deleteActivity;
-window.deleteActivityFromEdit = deleteActivityFromEdit;
-window.jumpToDay = jumpToDay;
-window.logDayCompletion = logDayCompletion;
-window.switchTab = switchTab;
-window.joinChallenge = joinChallenge;
-window.createCustomChallenge = createCustomChallenge;
-window.setReminder = setReminder;
-window.exportData = exportData;
-window.shareProgress = shareProgress;
-window.resetChallenge = resetChallenge;
-window.openCheatDayModal = openCheatDayModal;
-window.setTodayAsCheatDay = setTodayAsCheatDay;
-window.removeCheatDay = removeCheatDay;
-window.autoScheduleCheatDays = autoScheduleCheatDays;
-window.updateCheatDaySettings = updateCheatDaySettings;
-window.morphToTimeline = morphToTimeline;
-window.resetToGrid = resetToGrid;
+// Make functions global
+window.openDayModal = openDayModal;
+window.closeDayModal = closeDayModal;
+window.switchChartView = switchChartView;
 </script>
+
 </body>
 </html>
