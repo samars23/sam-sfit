@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sam'sFit90 - 90 Day Fitness Challenge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Fit90 - 90 Day Fitness Challenge</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,195 +20,187 @@
   --danger: #ef4444;
   --warning: #f59e0b;
   --cheat: #f97316;
+  --info: #3b82f6;
   
   --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f3e8ff 50%, #ede9fe 100%);
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.4);
-  --shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
-  --shadow-hover: 0 16px 48px rgba(99, 102, 241, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.98);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.8);
+  --shadow: 0 4px 16px rgba(99, 102, 241, 0.1);
+  --shadow-hover: 0 8px 24px rgba(99, 102, 241, 0.15);
+  --mobile-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   
   --text: #1e293b;
   --text-muted: #64748b;
   --text-light: #94a3b8;
   
-  --radius: 24px;
-  --radius-sm: 16px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 16px;
+  --radius-sm: 12px;
+  --radius-lg: 20px;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
 }
 
 body {
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   background: var(--bg-gradient);
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.5;
   overflow-x: hidden;
-  padding-bottom: 2rem;
+  padding-bottom: 5rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Header */
+/* Header - Optimized for Mobile */
 header {
   position: sticky;
   top: 0;
   z-index: 100;
   background: var(--card-bg);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: var(--glass-border);
-  box-shadow: var(--shadow);
-  padding: 1rem 2rem;
+  box-shadow: var(--mobile-shadow);
+  padding: 0.75rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 0.75rem;
   transition: var(--transition);
+  min-height: 64px;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .logo-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   color: white;
-  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.25);
-  animation: logoFloat 3s ease-in-out infinite;
-}
-
-@keyframes logoFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(3deg); }
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+  flex-shrink: 0;
 }
 
 .logo-text {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   font-weight: 900;
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  white-space: nowrap;
 }
 
+/* Header Stats - Better Mobile Layout */
 .header-stats {
   display: flex;
-  gap: 1rem;
-  flex: 1;
-  justify-content: center;
+  gap: 0.5rem;
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.25rem 0;
+  flex: 1;
+  min-width: 0;
+  justify-content: center;
 }
 
-.header-stats::-webkit-scrollbar { display: none; }
+.header-stats::-webkit-scrollbar { 
+  display: none; 
+  height: 0;
+}
 
 .stat-badge {
-  min-width: 100px;
-  padding: 0.85rem 1.25rem;
+  min-width: 70px;
+  padding: 0.5rem;
   border-radius: var(--radius-sm);
   background: var(--card-bg);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
   border: var(--glass-border);
-  box-shadow: var(--shadow);
+  box-shadow: var(--mobile-shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
+  gap: 0.25rem;
   transition: var(--transition);
-}
-
-.stat-badge:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
+  flex-shrink: 0;
+  height: 52px;
 }
 
 .stat-value {
-  font-size: 1.75rem;
+  font-size: 1.1rem;
   font-weight: 800;
   background: linear-gradient(45deg, var(--primary-dark), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  line-height: 1;
 }
 
 .stat-label {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
+  line-height: 1;
 }
 
+/* Header Button */
 .header-btn {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   border-radius: var(--radius-sm);
   font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: var(--transition);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  height: 40px;
 }
 
-.header-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.35);
+.header-btn:active {
+  transform: scale(0.98);
 }
 
 /* Main Container */
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
+  width: 100%;
 }
 
-/* Tabs */
+/* Tabs - Hidden on Mobile */
 .tabs {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  padding: 0.35rem;
-  background: var(--card-bg);
-  backdrop-filter: blur(20px);
-  border-radius: var(--radius-sm);
-  border: var(--glass-border);
-  box-shadow: var(--shadow);
-}
-
-.tab-btn {
-  flex: 1;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  font-weight: 600;
-  font-size: 0.9rem;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.tab-btn.active {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  display: none;
 }
 
 .tab-content {
@@ -217,70 +209,67 @@ header {
 
 .tab-content.active {
   display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Cards */
 .card {
   background: var(--card-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: var(--glass-border);
   border-radius: var(--radius);
-  padding: 1.75rem;
-  box-shadow: var(--shadow);
-  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  box-shadow: var(--mobile-shadow);
+  margin-bottom: 1rem;
   transition: var(--transition);
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 .card-title {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
+  line-height: 1.2;
 }
 
 .card-title i {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-size: 1.1rem;
 }
 
-/* Dashboard Layout */
+/* Dashboard Layout - Single Column on Mobile */
 .dashboard {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
-@media (min-width: 1024px) {
-  .dashboard {
-    grid-template-columns: 2fr 1fr;
-  }
-}
-
-/* Forms */
+/* Forms - Mobile Optimized */
 .form-group {
   margin-bottom: 1rem;
 }
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -296,10 +285,13 @@ input, select, textarea {
   width: 100%;
   padding: 0.85rem 1rem;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(226, 232, 240, 0.8);
-  font-size: 0.9rem;
+  font-size: 1rem;
   transition: var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 48px;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -309,17 +301,34 @@ input:focus, select:focus, textarea:focus {
   background: white;
 }
 
-textarea {
-  min-height: 100px;
-  resize: vertical;
+/* Custom Activity Section */
+.custom-activity-section {
+  background: rgba(124, 58, 237, 0.05);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border: 1px dashed rgba(124, 58, 237, 0.2);
 }
 
-/* Buttons */
+.custom-activity-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .custom-activity-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Buttons - Touch Friendly */
 .btn {
-  padding: 0.85rem 1.75rem;
+  padding: 0.85rem 1.5rem;
   border-radius: var(--radius-sm);
   border: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
@@ -327,41 +336,24 @@ textarea {
   align-items: center;
   gap: 0.5rem;
   justify-content: center;
+  white-space: nowrap;
+  min-height: 48px;
+  touch-action: manipulation;
+}
+
+.btn:active {
+  transform: scale(0.98);
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.35);
-}
-
-.btn-success {
-  background: linear-gradient(135deg, var(--accent), #059669);
-  color: white;
-  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
-}
-
-.btn-danger {
-  background: linear-gradient(135deg, var(--danger), #dc2626);
-  color: white;
-  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.25);
-}
-
-.btn-outline {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  color: var(--text-muted);
-}
-
-.btn-outline:hover {
-  background: white;
-  color: var(--primary);
-  border-color: var(--primary);
+.btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
 }
 
 .btn-block {
@@ -371,8 +363,14 @@ textarea {
 .btn-cheat {
   background: linear-gradient(135deg, var(--cheat), #ea580c);
   color: white;
-  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
   margin-top: 1rem;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  min-height: 36px;
 }
 
 /* Activity List */
@@ -382,13 +380,14 @@ textarea {
   gap: 0.75rem;
   max-height: 400px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .activity-item {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: var(--radius-sm);
   border: 1px solid rgba(226, 232, 240, 0.8);
-  padding: 1rem 1.25rem;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -396,24 +395,17 @@ textarea {
   border-left: 4px solid var(--primary);
 }
 
-.activity-item:hover {
-  transform: translateX(8px);
-  box-shadow: var(--shadow);
-  background: white;
-}
-
-.activity-item.cheat-day {
-  border-left-color: var(--cheat);
-}
-
 .activity-info {
   flex: 1;
+  min-width: 0;
 }
 
 .activity-name {
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--text);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
 }
 
 .activity-meta {
@@ -421,7 +413,7 @@ textarea {
   gap: 0.75rem;
   font-size: 0.8rem;
   color: var(--text-muted);
-  margin-top: 0.25rem;
+  flex-wrap: wrap;
 }
 
 .activity-value {
@@ -433,67 +425,99 @@ textarea {
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 0.75rem;
   margin-top: 1rem;
 }
 
 .stat-card {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem;
   border-radius: var(--radius-sm);
   text-align: center;
   border: 1px solid rgba(226, 232, 240, 0.8);
   transition: var(--transition);
 }
 
-.stat-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
-}
-
 .stat-card-value {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 800;
   background: linear-gradient(45deg, var(--primary-dark), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  line-height: 1;
 }
 
 .stat-card-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   color: var(--text-muted);
   margin-top: 0.5rem;
+  line-height: 1.2;
 }
 
-/* Calendar */
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
+/* Goal Progress */
+.goal-progress {
   margin-top: 1rem;
 }
 
-.calendar-header {
-  display: contents;
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.goal-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.goal-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.progress-bar {
+  height: 8px;
+  background: rgba(226, 232, 240, 0.6);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Calendar - Mobile Optimized */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.3rem;
+  margin-top: 1rem;
 }
 
 .day-header {
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 0.5rem;
+  padding: 0.4rem 0.2rem;
 }
 
 .day-cell {
   aspect-ratio: 1;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(226, 232, 240, 0.8);
   display: flex;
   flex-direction: column;
@@ -501,231 +525,144 @@ textarea {
   justify-content: center;
   cursor: pointer;
   transition: var(--transition);
-  position: relative;
-}
-
-.day-cell:hover {
-  transform: scale(1.08);
-  box-shadow: var(--shadow);
-  z-index: 2;
+  padding: 0.2rem;
+  min-height: 36px;
 }
 
 .day-number {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.85rem;
+  line-height: 1;
 }
 
 .day-status {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   text-transform: uppercase;
-  margin-top: 0.25rem;
-  opacity: 0.7;
-}
-
-.day-cell.completed {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: rgba(16, 185, 129, 0.4);
-  color: var(--accent);
-}
-
-.day-cell.missed {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: rgba(239, 68, 68, 0.4);
-  color: var(--danger);
+  margin-top: 0.15rem;
+  opacity: 0.8;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .day-cell.today {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(139, 92, 246, 0.2));
   border: 2px solid var(--primary);
-  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
-}
-
-.day-cell.cheat-day {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(234, 88, 12, 0.15));
-  border-color: rgba(249, 115, 22, 0.4);
-  color: var(--cheat);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(139, 92, 246, 0.05));
 }
 
 .day-cell.today::after {
   content: 'TODAY';
   position: absolute;
-  top: 4px;
-  right: 4px;
-  font-size: 0.5rem;
-  padding: 0.15rem 0.35rem;
-  border-radius: 999px;
+  top: 2px;
+  right: 2px;
+  font-size: 0.45rem;
+  padding: 0.1rem 0.25rem;
+  border-radius: 4px;
   background: var(--primary);
   color: white;
+  font-weight: 700;
 }
 
 /* Chart */
 .chart-container {
   position: relative;
-  height: 320px;
-  background: rgba(255, 255, 255, 0.9);
+  height: 250px;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: var(--radius-sm);
   padding: 1rem;
   margin-top: 1rem;
-}
-
-.activity-chart-selector {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
-}
-
-.activity-btn {
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  background: white;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  white-space: nowrap;
-}
-
-.activity-btn:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-.activity-btn.active {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  border: none;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
 }
 
 /* Chart Tabs */
 .chart-tabs {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
   margin-bottom: 1rem;
-  padding: 0.35rem;
-  background: rgba(255, 255, 255, 0.9);
+  padding: 0.25rem;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: var(--radius-sm);
   border: 1px solid rgba(226, 232, 240, 0.8);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chart-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .chart-tab-btn {
   flex: 1;
-  padding: 0.6rem 1rem;
+  min-width: 80px;
+  padding: 0.6rem 0.5rem;
   border: none;
   background: transparent;
   color: var(--text-muted);
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   border-radius: 10px;
   cursor: pointer;
   transition: var(--transition);
   white-space: nowrap;
-}
-
-.chart-tab-btn:hover {
-  color: var(--primary);
+  flex-shrink: 0;
 }
 
 .chart-tab-btn.active {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
 }
 
-/* Scroll Hint */
-.scroll-hint {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(226, 232, 240, 0.5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  animation: bounce 2s infinite;
-}
-
-.scroll-hint i {
-  font-size: 1.2rem;
-  color: var(--primary);
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
-}
-
-/* Modal */
+/* Modal - Mobile Full Screen */
 .modal {
   position: fixed;
   inset: 0;
   z-index: 1000;
   display: none;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  padding: 1rem;
-  animation: modalFadeIn 0.3s ease;
+  padding: 0;
+  background: var(--bg-gradient);
 }
 
 .modal.active {
   display: flex;
 }
 
-@keyframes modalFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 .modal-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  display: none;
 }
 
 .modal-card {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  max-height: 90vh;
+  height: 100%;
   overflow-y: auto;
-  background: var(--card-bg);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border: var(--glass-border);
-  border-radius: var(--radius);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  background: var(--bg-gradient);
+  border-radius: 0;
   animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 @keyframes modalSlideUp {
   from {
     opacity: 0;
-    transform: translateY(40px) scale(0.95);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 .modal-close {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 40px;
-  height: 40px;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   color: var(--text-muted);
   font-size: 1.2rem;
   cursor: pointer;
@@ -734,22 +671,18 @@ textarea {
   align-items: center;
   justify-content: center;
   z-index: 10;
-}
-
-.modal-close:hover {
-  background: var(--danger);
-  color: white;
-  transform: rotate(90deg);
+  box-shadow: var(--mobile-shadow);
 }
 
 .modal-header-section {
-  padding: 2rem;
+  padding: 1.5rem 1rem;
   background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(139, 92, 246, 0.05));
   border-bottom: 1px solid rgba(226, 232, 240, 0.5);
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   position: relative;
+  margin-top: 1rem;
 }
 
 .modal-day-badge {
@@ -757,278 +690,31 @@ textarea {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .day-circle {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 800;
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
-}
-
-.day-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.modal-day-info {
-  flex: 1;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
 }
 
 .modal-title {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 0.25rem;
 }
 
 .modal-subtitle {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-.modal-status-badge {
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background: rgba(16, 185, 129, 0.15);
-  color: var(--accent);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-.modal-status-badge.missed {
-  background: rgba(239, 68, 68, 0.15);
-  color: var(--danger);
-  border-color: rgba(239, 68, 68, 0.3);
-}
-
-.modal-status-badge.cheat {
-  background: rgba(249, 115, 22, 0.15);
-  color: var(--cheat);
-  border-color: rgba(249, 115, 22, 0.3);
-}
-
-.modal-stats-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  padding: 1.5rem 2rem;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
-}
-
-.modal-stat {
-  text-align: center;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-.modal-stat-icon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.modal-stat-value {
-  font-size: 1.75rem;
-  font-weight: 800;
-  background: linear-gradient(45deg, var(--primary-dark), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.modal-stat-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-top: 0.25rem;
-}
-
-.modal-activities {
-  padding: 2rem;
-}
-
-.modal-section-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.modal-section-title i {
-  color: var(--primary);
-}
-
-#modalActivitiesList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.modal-activity-item {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: var(--radius-sm);
-  padding: 1rem 1.25rem;
-  border-left: 4px solid var(--primary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: var(--transition);
-}
-
-.modal-activity-item:hover {
-  transform: translateX(8px);
-  box-shadow: var(--shadow);
-}
-
-.modal-activity-item.cheat {
-  border-left-color: var(--cheat);
-}
-
-.modal-activity-left {
-  flex: 1;
-}
-
-.modal-activity-type {
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--text);
-  margin-bottom: 0.25rem;
-}
-
-.modal-activity-time {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.modal-activity-value {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--accent);
-}
-
-.modal-empty {
-  text-align: center;
-  padding: 3rem 2rem;
-  color: var(--text-muted);
-}
-
-.modal-empty i {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  opacity: 0.3;
-}
-
-.modal-actions {
-  padding: 1.5rem 2rem;
-  border-top: 1px solid rgba(226, 232, 240, 0.5);
-}
-
-/* Legend */
-.legend {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(226, 232, 240, 0.5);
-  justify-content: center;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.legend-color {
-  width: 14px;
-  height: 14px;
-  border-radius: 4px;
-}
-
-.color-normal {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-}
-
-.color-cheat {
-  background: repeating-linear-gradient(45deg, var(--cheat), var(--cheat) 4px, #fed7aa 4px, #fed7aa 8px);
-}
-
-/* Empty State */
-.empty-state {
-  text-align: center;
-  padding: 3rem 2rem;
-  color: var(--text-muted);
-}
-
-.empty-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  opacity: 0.3;
-}
-
-/* Notification */
-.notification {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  max-width: 380px;
-  padding: 1.25rem 1.5rem;
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(40px);
-  border: var(--glass-border);
-  box-shadow: var(--shadow-hover);
-  transform: translateX(120%);
-  transition: transform 0.3s ease;
-  z-index: 1000;
-}
-
-.notification.show {
-  transform: translateX(0);
-}
-
-.notification-content {
-  display: flex;
-  align-items: start;
-  gap: 1rem;
-}
-
-.notification-icon {
-  font-size: 1.5rem;
-}
-
-.notification-text {
-  flex: 1;
-}
-
-.notification-title {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.notification-message {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
@@ -1040,133 +726,370 @@ textarea {
   left: 0;
   right: 0;
   background: var(--card-bg);
-  backdrop-filter: blur(40px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-top: var(--glass-border);
-  display: none;
+  display: flex;
   justify-content: space-around;
-  padding: 0.75rem;
+  padding: 0.75rem 0.5rem calc(0.75rem + env(safe-area-inset-bottom));
   z-index: 100;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-nav button {
   background: none;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: var(--text-muted);
   padding: 0.5rem;
   cursor: pointer;
   transition: var(--transition);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  flex: 1;
+  max-width: 70px;
 }
 
 .mobile-nav button.active {
   color: var(--primary);
   background: rgba(124, 58, 237, 0.1);
-  transform: translateY(-8px);
+  transform: translateY(-4px);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  header {
-    padding: 1rem;
-    gap: 1rem;
-  }
-  
-  .logo-icon {
-    width: 44px;
-    height: 44px;
-    font-size: 1.4rem;
-  }
-  
-  .logo-text {
-    font-size: 1.3rem;
-  }
-  
-  .header-stats {
-    gap: 0.75rem;
-  }
-  
-  .stat-badge {
-    min-width: 85px;
-    padding: 0.7rem 1rem;
-  }
-  
-  .stat-value {
-    font-size: 1.4rem;
+.mobile-nav button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+/* Notification - Mobile Bottom */
+.notification {
+  position: fixed;
+  bottom: 5.5rem;
+  left: 1rem;
+  right: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: var(--glass-border);
+  box-shadow: var(--mobile-shadow);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.notification.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.notification-content {
+  display: flex;
+  align-items: start;
+  gap: 0.75rem;
+}
+
+.notification-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.notification-text {
+  flex: 1;
+}
+
+.notification-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.notification-message {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.3;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+  html {
+    font-size: 17px;
   }
   
   .container {
-    padding: 1rem;
+    padding: 1.5rem;
   }
   
-  .tabs {
-    display: none;
-  }
-  
-  .mobile-nav {
-    display: flex;
-  }
-  
-  body {
-    padding-bottom: 80px;
+  .dashboard {
+    grid-template-columns: 1fr 1fr;
   }
   
   .form-row {
-    grid-template-columns: 1fr;
-  }
-  
-  .calendar-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: 1fr 1fr;
   }
   
   .stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(4, 1fr);
   }
-}
-
-@media (max-width: 480px) {
-  .logo-text {
-    display: none;
+  
+  .header-stats {
+    justify-content: center;
   }
   
   .stat-badge {
-    min-width: 75px;
-    padding: 0.6rem 0.8rem;
+    min-width: 80px;
+  }
+  
+  .notification {
+    left: auto;
+    right: 1.5rem;
+    width: auto;
+    max-width: 350px;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+    padding: 0.25rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-sm);
+    border: var(--glass-border);
+    box-shadow: var(--shadow);
+  }
+  
+  .tab-btn {
+    flex: 1;
+    min-width: 100px;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  }
+  
+  .mobile-nav {
+    display: none;
+  }
+  
+  body {
+    padding-bottom: 2rem;
+  }
+  
+  .dashboard {
+    grid-template-columns: 2fr 1fr;
+  }
+  
+  .modal {
+    padding: 1rem;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+  }
+  
+  .modal-card {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    max-height: 90vh;
+    background: var(--bg-gradient);
+    border-radius: var(--radius);
+    padding: 0;
+  }
+  
+  .modal-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .notification {
+    bottom: 2rem;
+    right: 2rem;
+    left: auto;
+  }
+}
+
+/* Small Mobile Adjustments */
+@media (max-width: 360px) {
+  html {
+    font-size: 15px;
+  }
+  
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  
+  .logo-text {
+    font-size: 1.1rem;
+  }
+  
+  .stat-badge {
+    min-width: 65px;
+    padding: 0.4rem;
   }
   
   .stat-value {
-    font-size: 1.2rem;
+    font-size: 1rem;
+  }
+  
+  .header-btn {
+    padding: 0.5rem;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .header-btn span {
+    display: none;
   }
   
   .calendar-grid {
-    grid-template-columns: repeat(4, 1fr);
+    gap: 0.25rem;
+  }
+  
+  .day-cell {
+    min-height: 32px;
+  }
+  
+  .day-number {
+    font-size: 0.8rem;
+  }
+  
+  .day-status {
+    font-size: 0.5rem;
+  }
+}
+
+/* Landscape Mode */
+@media (max-height: 500px) and (orientation: landscape) {
+  .mobile-nav {
+    padding: 0.5rem;
+  }
+  
+  .mobile-nav button {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .notification {
+    bottom: 4.5rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+    --card-bg: rgba(30, 41, 59, 0.95);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-light: #64748b;
+    --shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  input, select, textarea,
+  .activity-item,
+  .stat-card {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+  }
+  
+  .progress-bar {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* iOS Safari Specific Fixes */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+  }
+  
+  .mobile-nav {
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  }
+  
+  .modal-card {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(226, 232, 240, 0.3);
-  border-radius: 5px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, var(--primary-light), var(--secondary));
-  border-radius: 5px;
+  background: rgba(124, 58, 237, 0.3);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: rgba(124, 58, 237, 0.5);
 }
 </style>
 </head>
@@ -1175,7 +1098,7 @@ textarea {
 <header>
   <div class="logo">
     <div class="logo-icon">💪</div>
-    <div class="logo-text">Sam's Fit90</div>
+    <div class="logo-text">Fit90</div>
   </div>
   
   <div class="header-stats">
@@ -1191,21 +1114,22 @@ textarea {
       <div class="stat-value" id="completion">0%</div>
       <div class="stat-label">Done</div>
     </div>
-    <div class="stat-badge">
-      <div class="stat-value" id="totalActivities">0</div>
-      <div class="stat-label">Workouts</div>
-    </div>
   </div>
   
   <button class="header-btn" onclick="resetChallenge()">
-    <i class="fas fa-redo"></i> Reset
+    <i class="fas fa-redo"></i>
+    <span>Reset</span>
   </button>
 </header>
 
 <div class="container">
+  <!-- Desktop Tabs (hidden on mobile) -->
   <div class="tabs">
     <button class="tab-btn active" data-tab="dashboard">
       <i class="fas fa-chart-bar"></i> Dashboard
+    </button>
+    <button class="tab-btn" data-tab="goals">
+      <i class="fas fa-bullseye"></i> Goals
     </button>
     <button class="tab-btn" data-tab="activities">
       <i class="fas fa-list"></i> Activities
@@ -1230,18 +1154,58 @@ textarea {
           
           <div class="form-group">
             <label for="activityType">Activity Type</label>
-            <select id="activityType">
-              <option value="Running">🏃 Running</option>
-              <option value="Walking">🚶 Walking</option>
-              <option value="Push-ups">💪 Push-ups</option>
-              <option value="Pull-ups">🤸 Pull-ups</option>
-              <option value="Plank">🧘 Plank (seconds)</option>
-              <option value="Yoga">🧘‍♀️ Yoga</option>
-              <option value="Cycling">🚴 Cycling</option>
-              <option value="Swimming">🏊 Swimming</option>
-              <option value="Squats">🦵 Squats</option>
-              <option value="Weight Training">🏋️ Weight Training</option>
-            </select>
+            <div class="form-row">
+              <select id="activityType" onchange="handleActivityTypeChange()">
+                <option value="Running">🏃 Running</option>
+                <option value="Walking">🚶 Walking</option>
+                <option value="Steps">👣 Steps</option>
+                <option value="Push-ups">💪 Push-ups</option>
+                <option value="Pull-ups">🤸 Pull-ups</option>
+                <option value="Squats">🦵 Squats</option>
+                <option value="Plank">🧘 Plank</option>
+                <option value="Yoga">🧘‍♀️ Yoga</option>
+                <option value="Cycling">🚴 Cycling</option>
+                <option value="Swimming">🏊 Swimming</option>
+                <option value="Weight Training">🏋️ Weight Training</option>
+                <option value="custom">➕ Add Custom Activity</option>
+              </select>
+            </div>
+          </div>
+          
+          <!-- Custom Activity Input -->
+          <div id="customActivitySection" class="custom-activity-section" style="display: none;">
+            <div class="form-group">
+              <label for="customActivityName">Custom Activity Name</label>
+              <input type="text" id="customActivityName" placeholder="What activity did you do? (e.g., Basketball, Dancing, Hiking)">
+            </div>
+            
+            <div class="custom-activity-row">
+              <div class="form-group">
+                <label for="customActivityUnit">Unit</label>
+                <select id="customActivityUnit">
+                  <option value="minutes">Minutes</option>
+                  <option value="reps">Reps</option>
+                  <option value="seconds">Seconds</option>
+                  <option value="km">Kilometers</option>
+                  <option value="sets">Sets</option>
+                  <option value="steps">Steps</option>
+                  <option value="calories">Calories</option>
+                  <option value="laps">Laps</option>
+                  <option value="rounds">Rounds</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="customActivityCategory">Category</label>
+                <select id="customActivityCategory">
+                  <option value="Cardio">Cardio</option>
+                  <option value="Strength">Strength</option>
+                  <option value="Flexibility">Flexibility</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Outdoor">Outdoor</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
           </div>
           
           <div class="form-row">
@@ -1253,12 +1217,19 @@ textarea {
               <label for="activityUnit">Unit</label>
               <select id="activityUnit">
                 <option value="km">Kilometers</option>
+                <option value="steps">Steps</option>
                 <option value="reps">Reps</option>
                 <option value="seconds">Seconds</option>
                 <option value="minutes">Minutes</option>
                 <option value="sets">Sets</option>
+                <option value="calories">Calories</option>
               </select>
             </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="activityNotes">Notes (Optional)</label>
+            <textarea id="activityNotes" placeholder="How did it feel? Any achievements?"></textarea>
           </div>
           
           <button class="btn btn-primary btn-block" onclick="addActivity()">
@@ -1266,7 +1237,7 @@ textarea {
           </button>
           
           <button class="btn btn-cheat btn-block" onclick="toggleCheatDay()">
-            <i class="fas fa-utensils"></i> Toggle Cheat Day
+            <i class="fas fa-utensils"></i> Mark as Cheat Day
           </button>
         </div>
 
@@ -1279,39 +1250,23 @@ textarea {
             </h2>
           </div>
           
-          <!-- Chart Type Tabs -->
           <div class="chart-tabs">
             <button class="chart-tab-btn active" data-chart="weekly" onclick="switchChartView('weekly')">
-              Weekly Trends
+              Weekly
             </button>
             <button class="chart-tab-btn" data-chart="monthly" onclick="switchChartView('monthly')">
-              Monthly Overview
+              Monthly
             </button>
             <button class="chart-tab-btn" data-chart="activity" onclick="switchChartView('activity')">
-              Activity Split
+              Split
+            </button>
+            <button class="chart-tab-btn" data-chart="goals" onclick="switchChartView('goals')">
+              Goals
             </button>
           </div>
-          
-          <div id="activitySelector" class="activity-chart-selector"></div>
           
           <div class="chart-container">
             <canvas id="activityChart"></canvas>
-          </div>
-          
-          <div class="scroll-hint" id="scrollHint">
-            <i class="fas fa-chevron-down"></i>
-            <span>Scroll to transform calendar</span>
-          </div>
-          
-          <div class="legend">
-            <div class="legend-item">
-              <div class="legend-color color-normal"></div>
-              <span>Normal Day</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-color color-cheat"></div>
-              <span>Cheat Day</span>
-            </div>
           </div>
         </div>
       </div>
@@ -1340,9 +1295,14 @@ textarea {
               <div class="stat-card-label">Best Streak</div>
             </div>
             <div class="stat-card">
-              <div class="stat-card-value" id="avgDaily">0.0</div>
-              <div class="stat-card-label">Avg/Day</div>
+              <div class="stat-card-value" id="totalActivities">0</div>
+              <div class="stat-card-label">Total Activities</div>
             </div>
+          </div>
+          
+          <!-- Goal Progress -->
+          <div class="goal-progress" id="goalProgressContainer">
+            <!-- Dynamic content will be inserted here -->
           </div>
         </div>
 
@@ -1353,6 +1313,9 @@ textarea {
               <i class="fas fa-dumbbell"></i>
               Today's Activities
             </h2>
+            <button class="btn btn-sm btn-outline" onclick="showDayModal(getCurrentDay())">
+              <i class="fas fa-eye"></i> View
+            </button>
           </div>
           
           <div class="activity-list" id="todayActivities">
@@ -1369,6 +1332,62 @@ textarea {
     </div>
   </div>
 
+  <!-- GOALS TAB -->
+  <div class="tab-content" id="goals">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <i class="fas fa-bullseye"></i>
+          Set Your Goals
+        </h2>
+      </div>
+      
+      <div class="form-group">
+        <label for="goalActivityType">Activity Type</label>
+        <select id="goalActivityType">
+          <option value="Running">Running</option>
+          <option value="Walking">Walking</option>
+          <option value="Steps">Steps</option>
+          <option value="Push-ups">Push-ups</option>
+          <option value="Squats">Squats</option>
+          <option value="custom">Custom Activity</option>
+        </select>
+      </div>
+      
+      <div id="customGoalSection" class="custom-activity-section" style="display: none;">
+        <div class="form-group">
+          <label for="customGoalName">Custom Activity Name</label>
+          <input type="text" id="customGoalName" placeholder="Enter custom activity name">
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="goalTarget">Target Value</label>
+          <input type="number" id="goalTarget" placeholder="e.g., 900" min="1">
+        </div>
+        <div class="form-group">
+          <label for="goalUnit">Unit</label>
+          <select id="goalUnit">
+            <option value="km">Kilometers</option>
+            <option value="steps">Steps</option>
+            <option value="reps">Reps</option>
+            <option value="minutes">Minutes</option>
+            <option value="days">Days</option>
+          </select>
+        </div>
+      </div>
+      
+      <button class="btn btn-primary btn-block" onclick="addGoal()">
+        <i class="fas fa-plus"></i> Add Goal
+      </button>
+      
+      <div id="goalsList" style="margin-top: 1.5rem;">
+        <!-- Goals will be displayed here -->
+      </div>
+    </div>
+  </div>
+
   <!-- ACTIVITIES TAB -->
   <div class="tab-content" id="activities">
     <div class="card">
@@ -1377,6 +1396,14 @@ textarea {
           <i class="fas fa-list"></i>
           All Activities
         </h2>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn btn-sm btn-outline" onclick="filterActivities('all')">
+            All
+          </button>
+          <button class="btn btn-sm btn-outline" onclick="filterActivities('today')">
+            Today
+          </button>
+        </div>
       </div>
       
       <div class="activity-list" id="allActivities">
@@ -1399,37 +1426,26 @@ textarea {
           <i class="fas fa-calendar-alt"></i>
           90-Day Calendar
         </h2>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.25rem;">
+            <div style="width: 12px; height: 12px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 2px;"></div>
+            <span style="font-size: 0.7rem;">Done</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.25rem;">
+            <div style="width: 12px; height: 12px; background: rgba(124, 58, 237, 0.2); border: 2px solid var(--primary); border-radius: 2px;"></div>
+            <span style="font-size: 0.7rem;">Today</span>
+          </div>
+        </div>
       </div>
       
       <div class="calendar-grid" id="calendarGrid">
-        <div class="calendar-header">
-          <div class="day-header">Mon</div>
-          <div class="day-header">Tue</div>
-          <div class="day-header">Wed</div>
-          <div class="day-header">Thu</div>
-          <div class="day-header">Fri</div>
-          <div class="day-header">Sat</div>
-          <div class="day-header">Sun</div>
-        </div>
-      </div>
-      
-      <div class="legend">
-        <div class="legend-item">
-          <div class="legend-color" style="background:rgba(16, 185, 129, 0.15);border:1px solid rgba(16, 185, 129, 0.4);"></div>
-          <span>Completed</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background:rgba(239, 68, 68, 0.15);border:1px solid rgba(239, 68, 68, 0.4);"></div>
-          <span>Missed</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background:rgba(124, 58, 237, 0.2);border:2px solid var(--primary);"></div>
-          <span>Today</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-color" style="background:rgba(249, 115, 22, 0.15);border:1px solid rgba(249, 115, 22, 0.4);"></div>
-          <span>Cheat Day</span>
-        </div>
+        <div class="day-header">Mon</div>
+        <div class="day-header">Tue</div>
+        <div class="day-header">Wed</div>
+        <div class="day-header">Thu</div>
+        <div class="day-header">Fri</div>
+        <div class="day-header">Sat</div>
+        <div class="day-header">Sun</div>
       </div>
     </div>
   </div>
@@ -1455,35 +1471,17 @@ textarea {
       <div class="modal-status-badge" id="modalStatus">COMPLETED</div>
     </div>
     
-    <div class="modal-stats-row" id="modalStatsRow">
-      <div class="modal-stat">
-        <div class="modal-stat-icon">💪</div>
-        <div class="modal-stat-value" id="modalActivityCount">0</div>
-        <div class="modal-stat-label">Activities</div>
-      </div>
-      <div class="modal-stat">
-        <div class="modal-stat-icon">⏱️</div>
-        <div class="modal-stat-value" id="modalTotalTime">0</div>
-        <div class="modal-stat-label">Minutes</div>
-      </div>
-      <div class="modal-stat">
-        <div class="modal-stat-icon">🔥</div>
-        <div class="modal-stat-value" id="modalStreak">0</div>
-        <div class="modal-stat-label">Streak</div>
-      </div>
-    </div>
-    
-    <div class="modal-activities" id="modalActivities">
-      <h3 class="modal-section-title">
-        <i class="fas fa-list-check"></i>
+    <div class="modal-activities" style="padding: 1.5rem;">
+      <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+        <i class="fas fa-list-check" style="color: var(--primary);"></i>
         Activities Log
       </h3>
       <div id="modalActivitiesList"></div>
     </div>
     
-    <div class="modal-actions">
+    <div style="padding: 1rem 1.5rem;">
       <button class="btn btn-outline btn-block" onclick="closeDayModal()">
-        <i class="fas fa-check"></i> Done
+        <i class="fas fa-check"></i> Close
       </button>
     </div>
   </div>
@@ -1493,6 +1491,9 @@ textarea {
 <div class="mobile-nav">
   <button class="active" data-tab="dashboard">
     <i class="fas fa-chart-bar"></i>
+  </button>
+  <button data-tab="goals">
+    <i class="fas fa-bullseye"></i>
   </button>
   <button data-tab="activities">
     <i class="fas fa-list"></i>
@@ -1518,19 +1519,27 @@ textarea {
 let tracker = {
   startDate: new Date().toISOString().split('T')[0],
   activities: [],
-  cheatDays: {}
+  cheatDays: {},
+  goals: [],
+  customActivities: [] // Store custom activity names for reuse
 };
 
 let chart = null;
 let selectedActivity = null;
-let currentChartView = 'weekly'; // 'weekly', 'monthly', 'activity'
+let currentChartView = 'weekly';
+let currentActivityFilter = 'all';
 
 // Load data
 function loadData() {
   const saved = localStorage.getItem('fit90_tracker');
   if (saved) {
     try {
-      tracker = JSON.parse(saved);
+      const data = JSON.parse(saved);
+      tracker = {
+        ...tracker,
+        ...data,
+        customActivities: data.customActivities || []
+      };
     } catch (e) {
       console.error('Failed to load data:', e);
     }
@@ -1551,15 +1560,83 @@ function getCurrentDay() {
   return Math.max(1, Math.min(90, diffDays + 1));
 }
 
+// Handle activity type change
+function handleActivityTypeChange() {
+  const activityType = document.getElementById('activityType');
+  const customSection = document.getElementById('customActivitySection');
+  const unitSelect = document.getElementById('activityUnit');
+  
+  if (activityType.value === 'custom') {
+    customSection.style.display = 'block';
+    unitSelect.value = 'minutes';
+  } else {
+    customSection.style.display = 'none';
+    
+    // Set appropriate unit based on activity
+    const activity = activityType.value;
+    if (activity === 'Steps') {
+      unitSelect.value = 'steps';
+    } else if (activity === 'Running' || activity === 'Walking' || activity === 'Cycling' || activity === 'Swimming') {
+      unitSelect.value = 'km';
+    } else if (activity === 'Plank') {
+      unitSelect.value = 'seconds';
+    } else {
+      unitSelect.value = 'reps';
+    }
+  }
+}
+
+// Handle goal activity type change
+function handleGoalActivityTypeChange() {
+  const goalType = document.getElementById('goalActivityType');
+  const customSection = document.getElementById('customGoalSection');
+  
+  if (goalType.value === 'custom') {
+    customSection.style.display = 'block';
+  } else {
+    customSection.style.display = 'none';
+  }
+}
+
 // Add activity
 function addActivity() {
-  const type = document.getElementById('activityType').value;
-  const value = parseFloat(document.getElementById('activityValue').value);
-  const unit = document.getElementById('activityUnit').value;
+  const typeSelect = document.getElementById('activityType');
+  const valueInput = document.getElementById('activityValue');
+  const unitSelect = document.getElementById('activityUnit');
+  const notesInput = document.getElementById('activityNotes');
+  
+  let type, unit, category = null;
+  const value = parseFloat(valueInput.value);
+  const notes = notesInput.value.trim();
   
   if (!value || value <= 0) {
     showNotification('⚠️', 'Invalid Value', 'Please enter a valid number');
+    valueInput.focus();
     return;
+  }
+  
+  if (typeSelect.value === 'custom') {
+    const customName = document.getElementById('customActivityName').value.trim();
+    const customUnit = document.getElementById('customActivityUnit').value;
+    const customCategory = document.getElementById('customActivityCategory').value;
+    
+    if (!customName) {
+      showNotification('⚠️', 'Missing Name', 'Please enter a name for your custom activity');
+      document.getElementById('customActivityName').focus();
+      return;
+    }
+    
+    type = customName;
+    unit = customUnit;
+    category = customCategory;
+    
+    // Store custom activity for reuse
+    if (!tracker.customActivities.includes(customName)) {
+      tracker.customActivities.push(customName);
+    }
+  } else {
+    type = typeSelect.value;
+    unit = unitSelect.value;
   }
   
   const currentDay = getCurrentDay();
@@ -1569,26 +1646,38 @@ function addActivity() {
     type,
     value,
     unit,
+    category,
+    notes: notes || undefined,
     timestamp: new Date().toISOString()
   };
   
   tracker.activities.push(activity);
   saveData();
   
-  document.getElementById('activityValue').value = '';
+  // Clear inputs
+  valueInput.value = '';
+  notesInput.value = '';
+  if (typeSelect.value === 'custom') {
+    document.getElementById('customActivityName').value = '';
+    typeSelect.value = 'Running';
+    document.getElementById('customActivitySection').style.display = 'none';
+  }
   
   updateAll();
-  showNotification('✅', 'Activity Added', `${value} ${unit} of ${type} logged!`);
+  showNotification('✅', 'Activity Added!', `${value} ${unit} of ${type} logged!`);
   
   // Confetti for milestones
   const dayActivities = tracker.activities.filter(a => a.day === currentDay);
-  if (dayActivities.length === 1 || dayActivities.length === 5) {
+  if (dayActivities.length === 1 || dayActivities.length === 5 || dayActivities.length === 10) {
     confetti({
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 }
     });
   }
+  
+  // Check goals
+  checkGoals();
 }
 
 // Toggle cheat day
@@ -1599,8 +1688,8 @@ function toggleCheatDay() {
   updateAll();
   
   const message = tracker.cheatDays[day] ? 
-    'Cheat day activated 🍕' : 
-    'Cheat day removed';
+    'Cheat day activated! 🍕 Relax and enjoy!' : 
+    'Cheat day removed. Back on track! 💪';
   showNotification('🍔', 'Cheat Day', message);
 }
 
@@ -1612,11 +1701,133 @@ function deleteActivity(id) {
   saveData();
   updateAll();
   showNotification('🗑️', 'Deleted', 'Activity removed');
+  
+  // Check goals after deletion
+  checkGoals();
+}
+
+// Filter activities
+function filterActivities(filter) {
+  currentActivityFilter = filter;
+  renderAllActivities();
+}
+
+// Add goal
+function addGoal() {
+  const goalType = document.getElementById('goalActivityType');
+  const targetInput = document.getElementById('goalTarget');
+  const unitSelect = document.getElementById('goalUnit');
+  
+  let activity;
+  const target = parseFloat(targetInput.value);
+  
+  if (!target || target <= 0) {
+    showNotification('⚠️', 'Invalid Target', 'Please enter a valid target value');
+    targetInput.focus();
+    return;
+  }
+  
+  if (goalType.value === 'custom') {
+    const customName = document.getElementById('customGoalName').value.trim();
+    if (!customName) {
+      showNotification('⚠️', 'Missing Name', 'Please enter a name for your custom goal');
+      document.getElementById('customGoalName').focus();
+      return;
+    }
+    activity = customName;
+  } else {
+    activity = goalType.value;
+  }
+  
+  // Check if goal already exists for this activity
+  if (tracker.goals.some(g => g.activity === activity)) {
+    if (!confirm(`A goal already exists for ${activity}. Replace it?`)) return;
+    tracker.goals = tracker.goals.filter(g => g.activity !== activity);
+  }
+  
+  const goal = {
+    id: Date.now().toString(),
+    activity,
+    target,
+    unit: unitSelect.value,
+    created: new Date().toISOString()
+  };
+  
+  tracker.goals.push(goal);
+  saveData();
+  
+  // Clear inputs
+  targetInput.value = '';
+  if (goalType.value === 'custom') {
+    document.getElementById('customGoalName').value = '';
+    goalType.value = 'Running';
+    document.getElementById('customGoalSection').style.display = 'none';
+  }
+  
+  updateAll();
+  showNotification('🎯', 'Goal Set!', `${activity} goal: ${target} ${unitSelect.value}`);
+}
+
+// Remove goal
+function removeGoal(id) {
+  if (!confirm('Remove this goal?')) return;
+  
+  tracker.goals = tracker.goals.filter(g => g.id !== id);
+  saveData();
+  updateAll();
+  showNotification('🗑️', 'Goal Removed', 'Goal has been removed');
+}
+
+// Check goals
+function checkGoals() {
+  const currentDay = getCurrentDay();
+  let goalsUpdated = false;
+  
+  tracker.goals.forEach(goal => {
+    const total = tracker.activities
+      .filter(a => a.type === goal.activity && a.day <= currentDay)
+      .reduce((sum, a) => {
+        // Convert to goal unit if needed
+        let value = a.value;
+        if (a.unit !== goal.unit) {
+          if (a.unit === 'seconds' && goal.unit === 'minutes') {
+            value = value / 60;
+          } else if (a.unit === 'minutes' && goal.unit === 'seconds') {
+            value = value * 60;
+          }
+        }
+        return sum + value;
+      }, 0);
+    
+    const progress = (total / goal.target) * 100;
+    
+    if (progress >= 100 && !goal.completed) {
+      goal.completed = true;
+      goal.completedDate = new Date().toISOString();
+      goalsUpdated = true;
+      
+      // Big celebration!
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+      
+      setTimeout(() => {
+        showNotification('🏆', 'GOAL ACHIEVED!', `You completed your ${goal.activity} goal! 🎉`);
+      }, 500);
+    }
+  });
+  
+  if (goalsUpdated) {
+    saveData();
+    updateAll();
+  }
 }
 
 // Reset challenge
 function resetChallenge() {
-  if (!confirm('Reset all data? This cannot be undone!')) return;
+  if (!confirm('Reset all data? This will delete all your progress!')) return;
   
   localStorage.removeItem('fit90_tracker');
   location.reload();
@@ -1625,7 +1836,8 @@ function resetChallenge() {
 // Update all UI
 function updateAll() {
   updateStats();
-  buildActivityButtons();
+  renderGoalProgress();
+  renderGoalsList();
   renderChart();
   renderTodayActivities();
   renderAllActivities();
@@ -1639,7 +1851,6 @@ function updateStats() {
   const totalDays = completedDays.size;
   const completion = Math.round((totalDays / 90) * 100);
   const totalActivities = tracker.activities.length;
-  const avgDaily = currentDay > 0 ? (totalActivities / currentDay).toFixed(1) : '0.0';
   const cheatCount = Object.values(tracker.cheatDays).filter(Boolean).length;
   
   // Calculate streak
@@ -1671,39 +1882,150 @@ function updateStats() {
   document.getElementById('daysCompleted').textContent = totalDays;
   document.getElementById('cheatDays').textContent = cheatCount;
   document.getElementById('bestStreak').textContent = bestStreak;
-  document.getElementById('avgDaily').textContent = avgDaily;
 }
 
-// Build activity buttons
-function buildActivityButtons() {
-  const unique = [...new Set(tracker.activities.map(a => a.type))];
-  const container = document.getElementById('activitySelector');
-  container.innerHTML = '';
+// Render goal progress
+function renderGoalProgress() {
+  const container = document.getElementById('goalProgressContainer');
   
-  if (unique.length === 0) {
-    container.innerHTML = '<p style="color:var(--text-muted);padding:10px;text-align:center;">No activities yet - add some to see charts!</p>';
+  if (tracker.goals.length === 0) {
+    container.innerHTML = `
+      <div class="goal-progress">
+        <div class="goal-header">
+          <div class="goal-title">Goals Progress</div>
+          <div class="goal-value">No goals set</div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 0%"></div>
+        </div>
+        <div class="goal-meta">
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Set goals in Goals tab</span>
+        </div>
+      </div>
+    `;
     return;
   }
   
-  unique.forEach((activity, index) => {
-    const button = document.createElement('button');
-    button.className = `activity-btn ${index === 0 ? 'active' : ''}`;
-    button.textContent = activity;
-    button.onclick = () => selectActivity(activity, button);
-    container.appendChild(button);
-  });
+  // Calculate overall progress
+  let totalProgress = 0;
+  const goalsHTML = tracker.goals.map(goal => {
+    const currentTotal = tracker.activities
+      .filter(a => a.type === goal.activity)
+      .reduce((sum, a) => {
+        // Convert to goal unit if needed
+        let value = a.value;
+        if (a.unit !== goal.unit) {
+          if (a.unit === 'seconds' && goal.unit === 'minutes') value = value / 60;
+          if (a.unit === 'minutes' && goal.unit === 'seconds') value = value * 60;
+        }
+        return sum + value;
+      }, 0);
+    
+    const progress = Math.min((currentTotal / goal.target) * 100, 100);
+    totalProgress += progress;
+    
+    return `
+      <div style="margin-bottom: 0.75rem;">
+        <div class="goal-header">
+          <div class="goal-title">${goal.activity}</div>
+          <div class="goal-value">${progress.toFixed(1)}%</div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${progress}%"></div>
+        </div>
+        <div class="goal-meta">
+          <span style="font-size: 0.75rem;">${currentTotal.toFixed(1)} / ${goal.target} ${goal.unit}</span>
+          <span>${goal.completed ? '✅' : '🏃'}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
   
-  if (!selectedActivity && unique.length > 0) {
-    selectedActivity = unique[0];
-  }
+  const avgProgress = (totalProgress / tracker.goals.length).toFixed(1);
+  
+  container.innerHTML = `
+    <div class="goal-progress">
+      <div class="goal-header">
+        <div class="goal-title">Goals Progress</div>
+        <div class="goal-value">${avgProgress}%</div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: ${avgProgress}%"></div>
+      </div>
+      ${goalsHTML}
+    </div>
+  `;
 }
 
-// Select activity
-function selectActivity(activity, button) {
-  document.querySelectorAll('.activity-btn').forEach(b => b.classList.remove('active'));
-  button.classList.add('active');
-  selectedActivity = activity;
-  renderChart();
+// Render goals list
+function renderGoalsList() {
+  const container = document.getElementById('goalsList');
+  
+  if (tracker.goals.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state" style="padding: 1rem;">
+        <i class="fas fa-bullseye" style="font-size: 2rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+        <p style="color: var(--text-muted);">No goals set yet</p>
+        <p style="font-size:0.85rem;margin-top:0.5rem;color: var(--text-light);">Set your first goal above!</p>
+      </div>
+    `;
+    return;
+  }
+  
+  const goalsHTML = tracker.goals.map(goal => {
+    const currentTotal = tracker.activities
+      .filter(a => a.type === goal.activity)
+      .reduce((sum, a) => {
+        let value = a.value;
+        if (a.unit !== goal.unit) {
+          if (a.unit === 'seconds' && goal.unit === 'minutes') value = value / 60;
+          if (a.unit === 'minutes' && goal.unit === 'seconds') value = value * 60;
+        }
+        return sum + value;
+      }, 0);
+    
+    const progress = (currentTotal / goal.target) * 100;
+    const remaining = goal.target - currentTotal;
+    
+    return `
+      <div style="background: rgba(255, 255, 255, 0.05); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1rem; border-left: 4px solid ${goal.completed ? 'var(--accent)' : 'var(--primary)'};">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+          <div>
+            <div style="font-weight: 700; font-size: 1rem; color: var(--text);">${goal.activity}</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Target: ${goal.target} ${goal.unit}</div>
+          </div>
+          <span style="background: ${goal.completed ? 'var(--accent)' : 'var(--primary)'}; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">
+            ${goal.completed ? '✅ Achieved' : `${progress.toFixed(1)}%`}
+          </span>
+        </div>
+        
+        <div style="background: rgba(226, 232, 240, 0.3); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 0.75rem;">
+          <div style="height: 100%; background: linear-gradient(90deg, var(--accent), var(--primary)); width: ${progress}%; transition: width 0.5s ease;"></div>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          <span>Current: ${currentTotal.toFixed(1)} ${goal.unit}</span>
+          <span>Remaining: ${remaining > 0 ? remaining.toFixed(1) : '0'} ${goal.unit}</span>
+        </div>
+        
+        ${goal.completed ? 
+          `<div style="font-size: 0.8rem; color: var(--accent); background: rgba(16, 185, 129, 0.1); padding: 0.5rem; border-radius: var(--radius-sm); margin-bottom: 0.75rem;">
+            <i class="fas fa-trophy"></i> Completed on ${new Date(goal.completedDate).toLocaleDateString()}
+          </div>` : 
+          ''
+        }
+        
+        <button class="btn btn-sm btn-outline" onclick="removeGoal('${goal.id}')" style="width: 100%;">
+          <i class="fas fa-trash"></i> Remove Goal
+        </button>
+      </div>
+    `;
+  }).join('');
+  
+  container.innerHTML = `
+    <div style="font-weight: 700; margin-bottom: 1rem; color: var(--text);">Your Goals (${tracker.goals.length})</div>
+    ${goalsHTML}
+  `;
 }
 
 // Switch chart view
@@ -1716,14 +2038,6 @@ function switchChartView(view) {
   });
   document.querySelector(`.chart-tab-btn[data-chart="${view}"]`).classList.add('active');
   
-  // Show/hide activity selector
-  const selector = document.getElementById('activitySelector');
-  if (view === 'activity') {
-    selector.style.display = 'none';
-  } else {
-    selector.style.display = 'flex';
-  }
-  
   renderChart();
 }
 
@@ -1732,151 +2046,209 @@ function renderChart() {
   const ctx = document.getElementById('activityChart').getContext('2d');
   const currentDay = getCurrentDay();
   
+  if (chart) chart.destroy();
+  
   let labels = [];
-  let data = [];
-  let colors = [];
+  let datasets = [];
   let chartType = 'bar';
   
   if (currentChartView === 'weekly') {
     // Weekly Trends - Last 7 days
+    chartType = 'bar';
     const startDay = Math.max(currentDay - 6, 1);
     
     for (let day = startDay; day <= currentDay; day++) {
-      labels.push(`D${day}`);
-      
-      if (selectedActivity) {
-        const dayActivities = tracker.activities.filter(a => 
-          a.day === day && a.type === selectedActivity
-        );
-        const sum = dayActivities.reduce((total, a) => total + a.value, 0);
-        data.push(sum);
-      } else {
-        const dayActivities = tracker.activities.filter(a => a.day === day);
-        data.push(dayActivities.length);
-      }
-      
-      if (tracker.cheatDays[day]) {
-        colors.push('#f97316');
-      } else if (day === currentDay) {
-        colors.push('#22c55e');
-      } else {
-        colors.push('#7c3aed');
-      }
+      labels.push(`Day ${day}`);
     }
-  } else if (currentChartView === 'monthly') {
-    // Monthly Overview - All days up to current
-    for (let day = 1; day <= currentDay; day++) {
-      labels.push(day);
-      
-      if (selectedActivity) {
-        const dayActivities = tracker.activities.filter(a => 
-          a.day === day && a.type === selectedActivity
-        );
-        const sum = dayActivities.reduce((total, a) => total + a.value, 0);
-        data.push(sum);
-      } else {
-        const dayActivities = tracker.activities.filter(a => a.day === day);
-        data.push(dayActivities.length);
-      }
-      
-      if (tracker.cheatDays[day]) {
-        colors.push('#f97316');
-      } else if (day === currentDay) {
-        colors.push('#22c55e');
-      } else {
-        colors.push('#7c3aed');
-      }
-    }
-  } else if (currentChartView === 'activity') {
-    // Activity Split - Pie chart
-    chartType = 'doughnut';
-    const activityMap = {};
     
+    // Get top 3 activities for the week
+    const weekActivities = tracker.activities.filter(a => a.day >= startDay && a.day <= currentDay);
+    const activityCounts = {};
+    weekActivities.forEach(a => {
+      activityCounts[a.type] = (activityCounts[a.type] || 0) + 1;
+    });
+    
+    const topActivities = Object.entries(activityCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 3)
+      .map(([activity]) => activity);
+    
+    if (topActivities.length === 0) {
+      topActivities.push('No activities');
+    }
+    
+    // Create dataset for each top activity
+    const colors = ['#7c3aed', '#10b981', '#3b82f6'];
+    datasets = topActivities.map((activity, index) => {
+      const data = [];
+      for (let day = startDay; day <= currentDay; day++) {
+        const dayTotal = tracker.activities
+          .filter(a => a.day === day && a.type === activity)
+          .reduce((sum, a) => sum + a.value, 0);
+        data.push(dayTotal);
+      }
+      
+      return {
+        label: activity,
+        data,
+        backgroundColor: colors[index],
+        borderRadius: 6,
+        borderWidth: 0
+      };
+    });
+    
+  } else if (currentChartView === 'monthly') {
+    // Monthly Overview
+    chartType = 'line';
+    const daysInMonth = currentDay;
+    
+    for (let day = 1; day <= daysInMonth; day++) {
+      labels.push(`D${day}`);
+    }
+    
+    const monthlyData = [];
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayTotal = tracker.activities
+        .filter(a => a.day === day)
+        .reduce((sum, a) => sum + a.value, 0);
+      monthlyData.push(dayTotal);
+    }
+    
+    datasets = [{
+      label: 'Daily Activity',
+      data: monthlyData,
+      borderColor: '#7c3aed',
+      backgroundColor: 'rgba(124, 58, 237, 0.1)',
+      borderWidth: 2,
+      fill: true,
+      tension: 0.4
+    }];
+    
+  } else if (currentChartView === 'activity') {
+    // Activity Split
+    chartType = 'doughnut';
+    
+    const activityMap = {};
     tracker.activities.forEach(a => {
       activityMap[a.type] = (activityMap[a.type] || 0) + 1;
     });
     
     labels = Object.keys(activityMap);
-    data = Object.values(activityMap);
-    colors = [
-      '#7c3aed', '#8b5cf6', '#a78bfa', '#c4b5fd', 
-      '#10b981', '#f59e0b', '#ef4444', '#3b82f6'
-    ];
+    const data = Object.values(activityMap);
+    
+    if (labels.length === 0) {
+      labels = ['No activities'];
+      data.push(1);
+    }
+    
+    datasets = [{
+      data,
+      backgroundColor: [
+        '#7c3aed', '#8b5cf6', '#a78bfa', '#c4b5fd',
+        '#10b981', '#f59e0b', '#ef4444', '#3b82f6',
+        '#ec4899', '#14b8a6', '#f97316'
+      ],
+      borderWidth: 0
+    }];
+    
+  } else if (currentChartView === 'goals') {
+    // Goals progress
+    chartType = 'bar';
+    
+    tracker.goals.forEach((goal, index) => {
+      labels.push(goal.activity);
+    });
+    
+    if (labels.length === 0) {
+      labels = ['No goals set'];
+    }
+    
+    const goalData = tracker.goals.map(goal => {
+      const currentTotal = tracker.activities
+        .filter(a => a.type === goal.activity)
+        .reduce((sum, a) => {
+          let value = a.value;
+          if (a.unit !== goal.unit) {
+            if (a.unit === 'seconds' && goal.unit === 'minutes') value = value / 60;
+            if (a.unit === 'minutes' && goal.unit === 'seconds') value = value * 60;
+          }
+          return sum + value;
+        }, 0);
+      
+      return (currentTotal / goal.target) * 100;
+    });
+    
+    if (goalData.length === 0) {
+      goalData.push(0);
+    }
+    
+    datasets = [{
+      label: 'Goal Progress %',
+      data: goalData,
+      backgroundColor: goalData.map((progress, index) => 
+        progress >= 100 ? '#10b981' : ['#7c3aed', '#8b5cf6', '#a78bfa'][index % 3]
+      ),
+      borderRadius: 6,
+      borderWidth: 0
+    }];
   }
-  
-  if (chart) chart.destroy();
   
   chart = new Chart(ctx, {
     type: chartType,
     data: {
       labels,
-      datasets: [{
-        label: selectedActivity || 'Activities',
-        data,
-        backgroundColor: chartType === 'doughnut' ? colors : colors,
-        borderRadius: chartType === 'bar' ? 8 : 0,
-        borderWidth: 0
-      }]
+      datasets
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      scales: chartType === 'bar' ? {
-        y: {
-          beginAtZero: true,
-          grid: { color: 'rgba(0,0,0,0.05)' },
-          ticks: { 
-            font: { size: 11 },
-            stepSize: 1
-          }
-        },
-        x: {
-          grid: { display: false },
-          ticks: { 
-            maxRotation: 45, 
-            font: { size: 10 }
-          }
-        }
-      } : {},
       plugins: {
-        legend: { 
-          display: chartType === 'doughnut',
-          position: 'bottom'
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: {
+              size: 11
+            },
+            padding: 15,
+            usePointStyle: true
+          }
         },
         tooltip: {
           backgroundColor: 'rgba(30, 41, 59, 0.95)',
           padding: 12,
           cornerRadius: 8,
-          callbacks: {
-            afterLabel: function(context) {
-              if (currentChartView === 'weekly' || currentChartView === 'monthly') {
-                const dayIndex = currentChartView === 'weekly' ? 
-                  Math.max(getCurrentDay() - 6, 1) + context.dataIndex :
-                  context.dataIndex + 1;
-                
-                if (tracker.cheatDays[dayIndex]) {
-                  return '🍕 Cheat Day';
-                }
-              }
-              return '';
-            }
+          bodyFont: {
+            size: 12
+          },
+          titleFont: {
+            size: 11
           }
         }
       },
-      onClick: (event, elements) => {
-        if (elements.length > 0 && chartType === 'bar') {
-          const index = elements[0].index;
-          let dayIndex;
-          
-          if (currentChartView === 'weekly') {
-            dayIndex = Math.max(getCurrentDay() - 6, 1) + index;
-          } else {
-            dayIndex = index + 1;
+      scales: chartType === 'bar' || chartType === 'line' ? {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(226, 232, 240, 0.3)'
+          },
+          ticks: {
+            font: {
+              size: 10
+            }
           }
-          
-          openDayModal(dayIndex);
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            font: {
+              size: 10
+            },
+            maxRotation: 45
+          }
         }
-      }
+      } : {}
     }
   });
 }
@@ -1892,26 +2264,26 @@ function renderTodayActivities() {
       <div class="empty-state">
         <div class="empty-icon"><i class="fas fa-clipboard-list"></i></div>
         <p>No activities logged today</p>
-        <p style="font-size:0.85rem;margin-top:0.5rem;">Add your first activity above!</p>
+        <p style="font-size:0.85rem;margin-top:0.5rem;color: var(--text-light);">Add your first activity above!</p>
       </div>
     `;
     return;
   }
   
-  const isCheatDay = tracker.cheatDays[currentDay];
-  
   container.innerHTML = todayActivities
     .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
     .map(a => `
-      <div class="activity-item ${isCheatDay ? 'cheat-day' : ''}">
+      <div class="activity-item">
         <div class="activity-info">
           <div class="activity-name">${a.type}</div>
           <div class="activity-meta">
             <span class="activity-value">${a.value} ${a.unit}</span>
-            <span>${new Date(a.timestamp).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})}</span>
+            <span>${new Date(a.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+            ${a.category ? `<span style="background: rgba(124, 58, 237, 0.1); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.7rem;">${a.category}</span>` : ''}
           </div>
+          ${a.notes ? `<div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">${a.notes}</div>` : ''}
         </div>
-        <button class="btn btn-outline" style="padding:0.5rem 0.75rem;" onclick="deleteActivity('${a.id}')">
+        <button class="btn btn-sm btn-outline" onclick="deleteActivity('${a.id}')">
           <i class="fas fa-trash"></i>
         </button>
       </div>
@@ -1923,31 +2295,45 @@ function renderTodayActivities() {
 function renderAllActivities() {
   const container = document.getElementById('allActivities');
   
-  if (tracker.activities.length === 0) {
+  let activities = [...tracker.activities];
+  
+  if (currentActivityFilter === 'today') {
+    const currentDay = getCurrentDay();
+    activities = activities.filter(a => a.day === currentDay);
+  }
+  
+  activities.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  
+  if (activities.length === 0) {
     container.innerHTML = `
       <div class="empty-state">
         <div class="empty-icon"><i class="fas fa-clipboard-list"></i></div>
-        <p>No activities logged yet</p>
-        <p style="font-size:0.85rem;margin-top:0.5rem;">Start your fitness journey today!</p>
+        <p>No activities found</p>
+        <p style="font-size:0.85rem;margin-top:0.5rem;color: var(--text-light);">Try changing the filter or add new activities</p>
       </div>
     `;
     return;
   }
   
-  const sorted = [...tracker.activities].sort((a, b) => b.day - a.day || new Date(b.timestamp) - new Date(a.timestamp));
-  
-  container.innerHTML = sorted.map(a => {
-    const isCheatDay = tracker.cheatDays[a.day];
+  container.innerHTML = activities.map(a => {
+    const date = new Date(a.timestamp);
+    const isToday = a.day === getCurrentDay();
+    
     return `
-      <div class="activity-item ${isCheatDay ? 'cheat-day' : ''}">
+      <div class="activity-item">
         <div class="activity-info">
-          <div class="activity-name">Day ${a.day} • ${a.type}</div>
+          <div class="activity-name">
+            ${isToday ? 'Today • ' : `Day ${a.day} • `}
+            ${a.type}
+          </div>
           <div class="activity-meta">
             <span class="activity-value">${a.value} ${a.unit}</span>
-            <span>${new Date(a.timestamp).toLocaleDateString()}</span>
+            <span>${date.toLocaleDateString()} ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+            ${a.category ? `<span style="background: rgba(124, 58, 237, 0.1); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.7rem;">${a.category}</span>` : ''}
           </div>
+          ${a.notes ? `<div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">${a.notes}</div>` : ''}
         </div>
-        <button class="btn btn-outline" style="padding:0.5rem 0.75rem;" onclick="deleteActivity('${a.id}')">
+        <button class="btn btn-sm btn-outline" onclick="deleteActivity('${a.id}')">
           <i class="fas fa-trash"></i>
         </button>
       </div>
@@ -1961,11 +2347,25 @@ function renderCalendar() {
   const currentDay = getCurrentDay();
   const completedDays = new Set(tracker.activities.map(a => a.day));
   
-  // Keep the header
-  const header = container.querySelector('.calendar-header');
-  container.innerHTML = '';
-  container.appendChild(header);
+  // Clear existing cells (except headers)
+  while (container.children.length > 7) {
+    container.removeChild(container.lastChild);
+  }
   
+  // Calculate starting day of week for day 1
+  const startDate = new Date(tracker.startDate);
+  const startDayOfWeek = startDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
+  
+  // Add empty cells for days before start
+  const daysInWeek = 7;
+  for (let i = 1; i < startDayOfWeek; i++) {
+    const emptyCell = document.createElement('div');
+    emptyCell.className = 'day-cell';
+    emptyCell.style.visibility = 'hidden';
+    container.appendChild(emptyCell);
+  }
+  
+  // Add day cells
   for (let day = 1; day <= 90; day++) {
     const cell = document.createElement('div');
     cell.className = 'day-cell';
@@ -1978,11 +2378,17 @@ function renderCalendar() {
     if (isToday) {
       cell.classList.add('today');
     } else if (isCheatDay) {
-      cell.classList.add('cheat-day');
+      cell.style.background = 'rgba(249, 115, 22, 0.15)';
+      cell.style.borderColor = 'rgba(249, 115, 22, 0.4)';
+      cell.style.color = 'var(--cheat)';
     } else if (hasActivity) {
-      cell.classList.add('completed');
+      cell.style.background = 'rgba(16, 185, 129, 0.15)';
+      cell.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+      cell.style.color = 'var(--accent)';
     } else if (!isFuture) {
-      cell.classList.add('missed');
+      cell.style.background = 'rgba(239, 68, 68, 0.15)';
+      cell.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+      cell.style.color = 'var(--danger)';
     }
     
     cell.innerHTML = `
@@ -1991,12 +2397,17 @@ function renderCalendar() {
         isToday ? 'TODAY' :
         isCheatDay ? 'CHEAT' :
         hasActivity ? 'DONE' :
-        isFuture ? 'PENDING' : 'MISSED'
+        isFuture ? '' : 'MISSED'
       }</div>
     `;
     
     cell.onclick = () => showDayDetails(day);
     container.appendChild(cell);
+    
+    // Add new row after every 7th day
+    if ((day + startDayOfWeek - 1) % 7 === 0) {
+      // This is handled by CSS grid
+    }
   }
 }
 
@@ -2017,8 +2428,12 @@ function openDayModal(day) {
   const dayDate = new Date(startDate);
   dayDate.setDate(startDate.getDate() + day - 1);
   
-  const dateOptions = { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' };
-  const dateString = dayDate.toLocaleDateString(undefined, dateOptions);
+  const dateString = dayDate.toLocaleDateString(undefined, { 
+    weekday: 'long', 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric' 
+  });
   
   // Set day badge
   document.querySelector('.day-circle').textContent = day;
@@ -2027,73 +2442,43 @@ function openDayModal(day) {
   document.getElementById('modalTitle').textContent = `Day ${day} Details`;
   document.getElementById('modalSubtitle').textContent = dateString;
   
-  // Set status badge
+  // Set status
   const statusBadge = document.getElementById('modalStatus');
+  statusBadge.textContent = day === currentDay ? 'TODAY' : 
+    isCheatDay ? 'CHEAT DAY' : 
+    dayActivities.length > 0 ? 'COMPLETED' : 
+    day < currentDay ? 'MISSED' : 'PENDING';
+  
   statusBadge.className = 'modal-status-badge';
-  
-  if (day === currentDay) {
-    statusBadge.textContent = 'TODAY';
-    statusBadge.classList.add('today');
-  } else if (isCheatDay) {
-    statusBadge.textContent = 'CHEAT DAY';
-    statusBadge.classList.add('cheat');
-  } else if (dayActivities.length > 0) {
-    statusBadge.textContent = 'COMPLETED';
-  } else if (day < currentDay) {
-    statusBadge.textContent = 'MISSED';
-    statusBadge.classList.add('missed');
-  } else {
-    statusBadge.textContent = 'PENDING';
-  }
-  
-  // Set stats
-  document.getElementById('modalActivityCount').textContent = dayActivities.length;
-  
-  let totalMinutes = 0;
-  dayActivities.forEach(a => {
-    if (a.unit === 'minutes') totalMinutes += a.value;
-    else if (a.unit === 'seconds') totalMinutes += Math.round(a.value / 60);
-  });
-  document.getElementById('modalTotalTime').textContent = totalMinutes;
-  
-  // Calculate streak up to this day
-  const completedDays = new Set(tracker.activities.map(a => a.day));
-  let streak = 0;
-  for (let i = day; i >= 1; i--) {
-    if (completedDays.has(i)) {
-      streak++;
-    } else {
-      break;
-    }
-  }
-  document.getElementById('modalStreak').textContent = streak;
+  if (isCheatDay) statusBadge.classList.add('cheat');
+  if (day < currentDay && dayActivities.length === 0) statusBadge.classList.add('missed');
   
   // Set activities list
   const activitiesList = document.getElementById('modalActivitiesList');
   
   if (dayActivities.length === 0) {
     activitiesList.innerHTML = `
-      <div class="modal-empty">
-        <i class="fas fa-inbox"></i>
+      <div class="empty-state" style="padding: 1rem;">
+        <i class="fas fa-inbox" style="font-size: 2rem; opacity: 0.3;"></i>
         <p>No activities logged for this day</p>
       </div>
     `;
   } else {
     activitiesList.innerHTML = dayActivities
-      .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
       .map(a => {
-        const time = new Date(a.timestamp).toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit'
-        });
+        const time = new Date(a.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         
         return `
-          <div class="modal-activity-item ${isCheatDay ? 'cheat' : ''}">
-            <div class="modal-activity-left">
-              <div class="modal-activity-type">${a.type}</div>
-              <div class="modal-activity-time">${time}</div>
+          <div class="activity-item" style="margin-bottom: 0.75rem;">
+            <div class="activity-info">
+              <div class="activity-name">${a.type}</div>
+              <div class="activity-meta">
+                <span class="activity-value">${a.value} ${a.unit}</span>
+                <span>${time}</span>
+              </div>
+              ${a.notes ? `<div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">${a.notes}</div>` : ''}
             </div>
-            <div class="modal-activity-value">${a.value} ${a.unit}</div>
           </div>
         `;
       })
@@ -2101,22 +2486,13 @@ function openDayModal(day) {
   }
   
   modal.classList.add('active');
-  
-  // Add confetti if it's a milestone
-  if (dayActivities.length >= 5) {
-    setTimeout(() => {
-      confetti({
-        particleCount: 50,
-        spread: 60,
-        origin: { y: 0.6 }
-      });
-    }, 300);
-  }
+  document.body.style.overflow = 'hidden';
 }
 
 // Close day modal
 function closeDayModal() {
   document.getElementById('dayModal').classList.remove('active');
+  document.body.style.overflow = 'auto';
 }
 
 // Show notification
@@ -2137,7 +2513,7 @@ function showNotification(icon, title, message) {
   if (notificationTimeout) clearTimeout(notificationTimeout);
   notificationTimeout = setTimeout(() => {
     notification.classList.remove('show');
-  }, 3500);
+  }, 3000);
 }
 
 // Tab switching
@@ -2164,6 +2540,15 @@ document.querySelectorAll('.tab-btn, .mobile-nav button').forEach(button => {
       content.classList.remove('active');
     });
     document.getElementById(tabId).classList.add('active');
+    
+    // Update chart if needed
+    if (tabId === 'dashboard') {
+      setTimeout(() => {
+        if (chart) {
+          chart.resize();
+        }
+      }, 100);
+    }
   });
 });
 
@@ -2172,18 +2557,36 @@ document.addEventListener('DOMContentLoaded', () => {
   loadData();
   updateAll();
   
-  // Initialize chart view
-  switchChartView('weekly');
+  // Initialize event listeners
+  document.getElementById('activityType').addEventListener('change', handleActivityTypeChange);
+  document.getElementById('goalActivityType').addEventListener('change', handleGoalActivityTypeChange);
   
+  // Initialize chart
   setTimeout(() => {
-    showNotification('👋', 'Welcome to Fit90!', 'Start logging your activities to track your 90-day journey');
-  }, 500);
+    switchChartView('weekly');
+  }, 100);
+  
+  // Welcome notification
+  setTimeout(() => {
+    if (tracker.activities.length === 0) {
+      showNotification('👋', 'Welcome to Fit90!', 'Start by adding your first activity!');
+    }
+  }, 1000);
+  
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    if (chart) {
+      chart.resize();
+    }
+  });
 });
 
 // Make functions global
 window.openDayModal = openDayModal;
 window.closeDayModal = closeDayModal;
 window.switchChartView = switchChartView;
+window.showDayModal = openDayModal;
+window.filterActivities = filterActivities;
 </script>
 
 </body>
